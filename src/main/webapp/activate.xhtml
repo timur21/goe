@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+<f:metadata>
+    <f:viewParam name="activate" value="#{link}"/>
+</f:metadata>
+        <ui:composition template="/template/template.xhtml">
+            <ui:param name="pageTitle" value="Activation"/>
+            <ui:define name="metadata">
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="center">
+                    <h:panelGroup rendered="#{link == null}">
+                        <h:outputText value="activate = #{link}"/>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Activation Key"/>
+                                <h:panelGroup>
+                                    <h:inputText value="#{userController.activationKey}" immediate="true">
+                                        <f:validateLength minimum="3"/>
+                                    </h:inputText>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                                <h:messages errorClass="errorMessage" />
+                                <h:commandButton value="Activate" action="#{userController.activateByKey()}"/>
+                        </h:form>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{link != null}">
+                        <h:messages errorClass="errorMessage" infoClass="infoMessage"
+                                    layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
+
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+        </ui:composition>
+</f:view>
+</html>

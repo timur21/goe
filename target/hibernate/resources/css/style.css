@@ -1,0 +1,55 @@
+body{
+	padding: 0;
+	margin: 0 10%;
+}
+a{
+	text-decoration: none;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+
+.center{
+	margin: 0 15%;
+}
+
+.center-button{
+	margin-left: 50%;
+}
+
+.header{
+	height: 100px;
+	background: #da3;
+}
+
+.clear{
+	clear: both;
+}
+
+.infoMessage{
+	border-top: solid black 1px;
+	border-bottom: solid black 1px;
+	background: lightskyblue;
+}
+
+#admin-panel{
+	position: absolute;
+	width: 10%;
+	background: mediumturquoise;
+	left: 0;
+}
+.admin-menu{
+
+}
+.project-stage-container{
+	display: inline-block;
+	margin-right: 25px;
+}
+.project-stage{
+	width: 100px;
+	height: 100px;
+	border: 1px solid gray;
+}

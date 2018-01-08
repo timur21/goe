@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition>
+    <h:panelGroup rendered="#{userSession.user.userRole.userRoleId == 1 || userSession.user.userRole.userRoleId == 2}">
+        <div id="admin-panel">
+            <div class="admin-menu">
+                <ul>
+                    <li><h:link value="Add Segment Type" outcome="/backend/addSegmentType"/></li>
+                    <li><h:link value="Manage Segment Type" outcome="/backend/manageSegmentType"/></li>
+                </ul>
+            </div>
+        </div>
+    </h:panelGroup>
+</ui:composition>
+</html>
