@@ -11,9 +11,9 @@
 <h:body>
     <ui:composition template="/template/template.xhtml">
         <ui:param name="pageTitle" value="Sign in"/>
-        <ui:define name="content">
-            <div class="center">
-                <div class="center">
+        <ui:define name="content-center">
+            <div class="content-center">
+                <div class="content-center">
                     <h3>JSF Login</h3>
                 </div>
                 <h:form>
@@ -36,8 +36,7 @@
                     <h:messages errorClass="errorMessage" infoClass="infoMessage"
                                 layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
 
-                    <h:commandButton action="#{userController.signin}"
-                                     value="Login"/>
+                    <h:commandButton action="#{userController.signIn()}" value="Login"/>
                 </h:form>
             </div>
         </ui:define>

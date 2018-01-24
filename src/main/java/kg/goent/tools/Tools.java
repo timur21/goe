@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 /**
  * Created by Aziret on 16.01.2017.
@@ -22,6 +23,8 @@ public class Tools implements Serializable {
     public static void killInfoSession(){
         SessionTools.setSession("infoMessageSession", null);
     }
+
+    */
     public static final String encode(String login){
         try{
             return Base64.getUrlEncoder().encodeToString(login.getBytes("utf-8"));
@@ -35,7 +38,6 @@ public class Tools implements Serializable {
         return new String(Base64.getUrlDecoder().decode(code));
 
     }
-*/
     public static final void faceMessageWarn(String summary,String detail){
         FacesContext.getCurrentInstance().addMessage(
                 null,
@@ -55,5 +57,11 @@ public class Tools implements Serializable {
             key += symbols.charAt(rand.nextInt(36));
         }
         return key;
+    }
+
+    public static String getFieldMsg(String msg){
+        ResourceBundle bundle = ResourceBundle.getBundle("fields",
+                FacesContext.getCurrentInstance().getViewRoot().getLocale());
+        return bundle.getString(msg);
     }
 }

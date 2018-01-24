@@ -1,6 +1,6 @@
 package kg.goent.models;
 
-import kg.goent.tools.Tools;
+import kg.goent.models.project.ProjectMember;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -28,7 +28,9 @@ import java.util.List;
         @NamedQuery(name="User.findByEmail",
                 query="SELECT u FROM kg.goent.models.User u WHERE u.email = :email"),
         @NamedQuery(name="User.findByEmailPass",
-                query="SELECT u FROM kg.goent.models.User u WHERE u.email = :email AND u.password = :password")
+                query="SELECT u FROM kg.goent.models.User u WHERE u.email = :email AND u.password = :password"),
+        @NamedQuery(name="User.searchByEmail",
+                query = "SELECT u FROM kg.goent.models.User u WHERE u.email LIKE :email")
 })
 public class User implements Serializable,Validator{
     @Id
@@ -196,4 +198,21 @@ public class User implements Serializable,Validator{
             throw new ValidatorException(msg);
         }
     }
+
+//    @Override
+//    public String toString() {
+//        return "\nUser{" +
+//                "userId=" + userId +
+//                ", fname='" + fname + '\'' +
+//                ", lname='" + lname + '\'' +
+//                ", password='" + password + '\'' +
+//                ", confirm='" + confirm + '\'' +
+//                ", email='" + email + '\'' +
+//                ", phone='" + phone + '\'' +
+//                ", activationKey='" + activationKey + '\'' +
+//                ", projectMemberList=" + projectMemberList +
+//                ", userRole=" + userRole +
+//                ", userStatus=" + userStatus +
+//                "}\n";
+//    }
 }

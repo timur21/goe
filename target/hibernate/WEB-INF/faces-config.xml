@@ -6,7 +6,6 @@
     <application>
         <locale-config>
             <default-locale>ru</default-locale>
-            <supported-locale>en</supported-locale>
             <supported-locale>ky</supported-locale>
         </locale-config>
         <resource-bundle>

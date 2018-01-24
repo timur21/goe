@@ -1,6 +1,6 @@
 package kg.goent.controllers;
 
-import kg.goent.models.Project;
+import kg.goent.models.project.Project;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,8 +10,10 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class ProjectSession {
+public class ProjectSession extends GetReqBean {
     private Project project;
+    private boolean bmcReady;
+
 
     public Project getProject() {
         return project;
@@ -23,5 +25,9 @@ public class ProjectSession {
 
     public String closeProject(){
         return "index";
+    }
+
+    public boolean isBmcFinished(){
+        return project.getBmc().getBmcStatus().getBmcStatusId() == 1;
     }
 }

@@ -1,7 +1,7 @@
 package kg.goent.facade;
 
 import kg.goent.dao.ObjectDao;
-import kg.goent.models.MemberRole;
+import kg.goent.models.project.MemberRole;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class MemberRoleFacade {
 
     public MemberRoleFacade() {
         if(findAll().size() == 0){
-
+            initialize();
         }
     }
 
@@ -31,7 +31,7 @@ public class MemberRoleFacade {
 
     public void delete(MemberRole memberRole) {
         objectDao.beginTransaction();
-        objectDao.getEntityManager().remove(memberRole);
+        objectDao.getEntityManager().remove(objectDao.getEntityManager().contains(memberRole) ? memberRole : objectDao.getEntityManager().merge(memberRole));
         objectDao.commitAndCloseTransaction();
     }
 
@@ -61,11 +61,11 @@ public class MemberRoleFacade {
         return memberRole;
     }
 
-    public MemberRole findByStatus(String status){
+    public MemberRole findByRole(String status){
         MemberRole ms;
         try {
             objectDao.beginTransaction();
-            ms = objectDao.getEntityManager().createNamedQuery("MemberStatus.findByMemberStatus",MemberRole.class)
+            ms = objectDao.getEntityManager().createNamedQuery("MemberRole.findByMemberRole",MemberRole.class)
                     .setParameter("status",status).getSingleResult();
         }catch (Exception ex){
             ms = null;
@@ -76,10 +76,25 @@ public class MemberRoleFacade {
     }
 
     private void initialize(){
-        MemberRole mr = new MemberRole("administrator");
+        MemberRole mr = new MemberRole("team leader");
         create(mr);
-        mr = new MemberRole("");
+        mr = new MemberRole("team member");
         create(mr);
+        mr = new MemberRole("observer");
+        create(mr);
+    }
+
+    public List<MemberRole> findAllSimpleUsers(){
+        List<MemberRole> memberRoleList;
+        try {
+            objectDao.beginTransaction();
+            memberRoleList = objectDao.getEntityManager().createNamedQuery("MemberRole.findAllSimpleUsers",MemberRole.class).getResultList();
+        }catch (Exception ex){
+            memberRoleList = null;
+        }finally {
+            objectDao.commitAndCloseTransaction();
+        }
+        return memberRoleList;
     }
 
 }

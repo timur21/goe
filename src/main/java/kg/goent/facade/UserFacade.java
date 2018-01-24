@@ -25,7 +25,7 @@ public class UserFacade {
 
     public void deleteUser(User user) {
         userDao.beginTransaction();
-        userDao.getEntityManager().remove(user);
+        userDao.getEntityManager().remove(userDao.getEntityManager().contains(user) ? user : userDao.getEntityManager().merge(user));
         userDao.commitAndCloseTransaction();
     }
 
@@ -74,6 +74,33 @@ public class UserFacade {
             userDao.commitAndCloseTransaction();
         }
         return user;
+    }
+    public List<User> searchByEmailBy5(String email){
 
+        List<User> userList;
+        try {
+            userDao.beginTransaction();
+            userList = userDao.getEntityManager().createNamedQuery("User.searchByEmail",User.class).
+                    setParameter("email","%"+email+"%").setMaxResults(5).getResultList();
+        }catch (Exception ex){
+            userList = new ArrayList<User>();
+        }finally {
+            userDao.commitAndCloseTransaction();
+        }
+        return userList;
+    }
+
+    public List<User> searchByEmail(String email){
+        List<User> userList;
+        try {
+            userDao.beginTransaction();
+            userList = userDao.getEntityManager().createNamedQuery("User.searchByEmail",User.class).
+                    setParameter("email","%"+email+"%").getResultList();
+        }catch (Exception ex){
+            userList = new ArrayList<User>();
+        }finally {
+            userDao.commitAndCloseTransaction();
+        }
+        return userList;
     }
 }

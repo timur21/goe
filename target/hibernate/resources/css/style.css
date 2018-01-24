@@ -12,8 +12,22 @@ a{
 	float: right;
 }
 
-.center{
-	margin: 0 15%;
+.content-center{
+	margin-left: 20%;
+	width: 70%;
+	display: inline-block;
+}
+.content-left{
+	width: 15%;
+	display: inline-block;
+	float: left;
+}
+
+.content-right{
+	width: 15%;
+	display: inline-block;
+	background-color: yellow;
+	float: left;
 }
 
 .center-button{

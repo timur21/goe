@@ -6,15 +6,21 @@
 
     <persistence-unit name="hibernate" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>kg.goent.models.bmc.Bmc</class>
+        <class>kg.goent.models.bmc.BmcStatus</class>
+        <class>kg.goent.models.bmc.Segment</class>
+        <class>kg.goent.models.bmc.SegmentContainer</class>
+        <class>kg.goent.models.bmc.SegmentType</class>
+        <class>kg.goent.models.hypothesis.Hypothesis</class>
+        <class>kg.goent.models.hypothesis.HypothesisContainer</class>
+        <class>kg.goent.models.project.MemberRole</class>
+        <class>kg.goent.models.project.MemberStatus</class>
+        <class>kg.goent.models.project.Project</class>
+        <class>kg.goent.models.project.ProjectMember</class>
+        <class>kg.goent.models.project.ProjectStatus</class>
         <class>kg.goent.models.User</class>
-        <class>kg.goent.models.MemberRole</class>
-        <class>kg.goent.models.MemberStatus</class>
-        <class>kg.goent.models.Project</class>
-        <class>kg.goent.models.ProjectMember</class>
         <class>kg.goent.models.UserRole</class>
         <class>kg.goent.models.UserStatus</class>
-        <class>kg.goent.models.ProjectStatus</class>
-
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/goent" />

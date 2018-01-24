@@ -1,7 +1,7 @@
 package kg.goent.facade;
 
 import kg.goent.dao.ObjectDao;
-import kg.goent.models.MemberStatus;
+import kg.goent.models.project.MemberStatus;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class MemberStatusFacade {
 
     public void delete(MemberStatus memberStatus) {
         objectDao.beginTransaction();
-        objectDao.getEntityManager().remove(memberStatus);
+        objectDao.getEntityManager().remove(objectDao.getEntityManager().contains(memberStatus) ? memberStatus : objectDao.getEntityManager().merge(memberStatus));
         objectDao.commitAndCloseTransaction();
     }
 
@@ -81,6 +81,8 @@ public class MemberStatusFacade {
         ms = new MemberStatus("banned");
         create(ms);
         ms = new MemberStatus("pending");
+        create(ms);
+        ms = new MemberStatus("deleted/retired");
         create(ms);
     }
 }

@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition>
-    <h:panelGroup rendered="#{userSession.user.userRole.userRoleId == 1 || userSession.user.userRole.userRoleId == 2}">
+    <h:panelGroup rendered="#{sessionController.user.userRole.userRoleId == 1 || sessionController.user.userRole.userRoleId == 2}">
         <div id="admin-panel">
             <div class="admin-menu">
                 <ul>

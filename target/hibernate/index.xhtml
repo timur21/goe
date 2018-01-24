@@ -10,67 +10,67 @@
     <h:body>
         <ui:composition template="template/template.xhtml">
             <ui:param name="pageTitle" value="Home"/>
-            <ui:define name="content">
-                <div class="center">
-                    <h:panelGroup rendered="#{userSession.user != null and userSession.user.activationKey == ''}">
+            <ui:define name="content-center">
+                <div class="content-center">
+                    <h:panelGroup rendered="#{sessionController.user != null and sessionController.user.activationKey == ''}">
                         <h:panelGrid columns="2">
                             <h:outputText value="Id"/>
-                            <h:outputText value="#{userSession.user.userId}"/>
+                            <h:outputText value="#{sessionController.user.userId}"/>
 
                             <h:outputText value="First name"/>
-                            <h:outputText value="#{userSession.user.fname}"/>
+                            <h:outputText value="#{sessionController.user.fname}"/>
 
                             <h:outputText value="Last name"/>
-                            <h:outputText value="#{userSession.user.lname}"/>
+                            <h:outputText value="#{sessionController.user.lname}"/>
 
                             <h:outputText value="email"/>
-                            <h:outputText value="#{userSession.user.email}"/>
+                            <h:outputText value="#{sessionController.user.email}"/>
 
                             <h:outputText value="phone"/>
-                            <h:outputText value="#{userSession.user.phoneF()}"/>
+                            <h:outputText value="#{sessionController.user.phoneF()}"/>
                         </h:panelGrid>
-                        <h:link value="Send Mail" outcome="sendMail"/><br/>
+                        <h:form>
+                            <h:commandButton value="Send Mail" action="#{mailController.sendMail()}"/><br/>
+                        </h:form>
                     </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup rendered="#{sessionController.logged and sessionController.user.activationKey.length() == 0}">
 
-                    <h:panelGroup rendered="#{userSession.logged and userSession.user.activationKey.length() == 0}">
+                        <h:panelGroup rendered="#{projectMemberController.getAllProjectMembers().size() != 0}">
+                            <h:form>
+                                <h:dataTable value="#{projectMemberController.getAllProjectMembers()}" var="projectMember" border="1">
+                                    <h:column headerClass="table-header" footerClass="table-footer">
+                                        <f:facet name="header">
+                                            Название
+                                        </f:facet>
+                                        <h:commandLink value="#{projectMember.project.title}"
+                                                       action="#{projectController.projectOverView(projectMember.project)}"/>
+                                    </h:column>
 
+                                    <h:column headerClass="table-header" footerClass="table-footer">
+                                        <f:facet name="header">
+                                            Состояние
+                                        </f:facet>
+                                        <h:outputText value="#{projectMember.project.description}"/>
+                                    </h:column>
 
-                        <h:dataTable value="#{userSession.user.projectMemberList}" var="projectMember" border="1">
-                            <h:column headerClass="table-header" footerClass="table-footer">
-                                <f:facet name="header">
-                                    Название
-                                </f:facet>
-                                <h:link value="#{projectMember.project.title}" outcome="/pages/project-overview"/>
-                            </h:column>
-
-                            <h:column headerClass="table-header" footerClass="table-footer">
-                                <f:facet name="header">
-                                    Состояние
-                                </f:facet>
-                                <h:outputText value="#{projectMember.project.description}"/>
-                            </h:column>
-                            <h:column headerClass="table-header" footerClass="table-footer">
-                                <f:facet name="header">
-                                    Удалить
-                                </f:facet>
-                                <h:link value="[X]" outcome="/pages/project-overview"/>
-                            </h:column>
-                        </h:dataTable>
-
-                        <h:panelGroup rendered="#{userSession.user.projectMemberList.size() == 0}" var="projectMember">
+                                </h:dataTable>
+                            </h:form>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{sessionController.user.projectMemberList.size() == 0}" var="projectMember">
                             <h:outputText value="No projects to show"/>
                         </h:panelGroup>
 
-                        <h2><h:link value="Create Project" outcome="new-project"/></h2>
+                        <h2><h:link value="Create Project" outcome="#{projectController.addProject()}"/></h2>
                         <h:link value="Test" outcome="test"/><br/>
                     </h:panelGroup>
 
-                    <h:panelGroup rendered="#{userSession.isLogged() and userSession.user.activationKey.length() != 0}">
+                    <h:panelGroup rendered="#{sessionController.isLogged() and sessionController.user.activationKey.length() != 0}">
                         <h:link value="Activate account" outcome="activate"/>
                         <br/>
                     </h:panelGroup>
 
-                    <h:outputLabel value="user: #{userSession.user.email}"/>
+                    <h:outputLabel value="user: #{sessionController.user.email}"/>
                 </div>
             </ui:define>
         </ui:composition>

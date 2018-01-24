@@ -7,7 +7,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <ui:composition>
-
+        <f:metadata>
+            <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+            <f:viewParam name="bmcId" value="#{bmcController.bmcId}"/>
+            <f:viewParam name="segmentContainer" value="#{segmentContainerController.segmentContainerId}"/>
+        </f:metadata>
     </ui:composition>
 </f:view>
 </html>

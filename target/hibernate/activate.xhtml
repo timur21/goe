@@ -7,15 +7,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
 <f:metadata>
-    <f:viewParam name="activate" value="#{link}"/>
+    <f:viewParam name="activate" value="#{userController.activate}"/>
 </f:metadata>
         <ui:composition template="/template/template.xhtml">
             <ui:param name="pageTitle" value="Activation"/>
             <ui:define name="metadata">
             </ui:define>
 
-            <ui:define name="content">
-                <div class="center">
+            <ui:define name="content-center">
+                <div class="content-center">
                     <h:panelGroup rendered="#{link == null}">
                         <h:outputText value="activate = #{link}"/>
                         <h:form>
