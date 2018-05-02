@@ -9,26 +9,28 @@
 <f:metadata>
     <f:viewParam name="activate" value="#{userController.activate}"/>
 </f:metadata>
-        <ui:composition template="/template/template.xhtml">
+        <ui:composition template="/template/mainTemplate.xhtml">
+            <ui:define name="sidebar-left"/>
             <ui:param name="pageTitle" value="Activation"/>
             <ui:define name="metadata">
             </ui:define>
 
-            <ui:define name="content-center">
-                <div class="content-center">
+            <ui:define name="content">
+
+                <div class="content-center form d-flex justify-content-center" style="margin-top: 5%">
                     <h:panelGroup rendered="#{link == null}">
-                        <h:outputText value="activate = #{link}"/>
                         <h:form>
-                            <h:panelGrid columns="2">
-                                <h:outputText value="Activation Key"/>
-                                <h:panelGroup>
-                                    <h:inputText value="#{userController.activationKey}" immediate="true">
+                            <div class="activate-form">
+                                <h2 style="color:#00A5DE; font-family:Calibri;">Account Activation!</h2>
+                                <div class="d-flex justify-content-center">
+                                    <h:inputText style="height: fit-content" value="#{userController.activationKey}" immediate="true">
                                         <f:validateLength minimum="3"/>
                                     </h:inputText>
-                                </h:panelGroup>
-                            </h:panelGrid>
-                                <h:messages errorClass="errorMessage" />
-                                <h:commandButton value="Activate" action="#{userController.activateByKey()}"/>
+
+                                    <h:messages errorClass="errorMessage" />
+                                    <h:commandButton value="Activate" styleClass="submit" action="#{userController.activateByKey()}"/>
+                                </div>
+                            </div>
                         </h:form>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{link != null}">

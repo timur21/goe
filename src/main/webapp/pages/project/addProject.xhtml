@@ -8,29 +8,33 @@
 <f:view>
 
     <h:body>
-        <ui:composition template="/template/template.xhtml">
+        <ui:composition template="/template/mainTemplate.xhtml">
             <ui:param name="pageTitle" value="New project"/>
-            <ui:define name="content-center">
-                <div class="content-center">
-                    <h:form>
-                        <h:panelGrid columns="2">
+            <ui:define name="sidebar-left"/>
+            <ui:define name="content">
+                <div class="content-center form">
+                    <div class="project-panel">
+                        <h:form>
+                            <h2 style="color:#00A5DE; margin:0px 25px 25px 25px; text-align: center; font-family:Calibri;">Создание проекта</h2>
+                            <h:panelGrid columns="2">
 
-                            <h:outputText value="Project title"/>
-                            <h:panelGroup>
-                                <h:inputText value="#{projectController.project.title}">
+                                <h:outputText value="Название проекта"/>
+                                <h:panelGroup>
+                                    <h:inputText value="#{projectController.project.title}">
 
-                                </h:inputText>
-                            </h:panelGroup>
+                                    </h:inputText>
+                                </h:panelGroup>
 
-                            <h:outputText value="Description"/>
-                            <h:inputTextarea value="#{projectController.project.description}"/>
+                                <h:outputText value="Описание"/>
+                                <h:inputTextarea styleClass="text-area" value="#{projectController.project.description}"/>
 
-                            <h:outputText rendered="false"/>
-                            <h:commandButton value="Create project" action="#{projectController.createProject}"/>
-                            <h:messages errorClass="errorMessage" infoClass="infoMessage"
-                                        layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
-                        </h:panelGrid>
-                    </h:form>
+                                <h:outputText rendered="false"/>
+                                <h:commandButton value="Создать проект" styleClass="submit" action="#{projectController.createProject}"/>
+                                <h:messages errorClass="errorMessage" infoClass="infoMessage"
+                                            layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
                 </div>
             </ui:define>
         </ui:composition>

@@ -107,7 +107,7 @@ public class UserController extends GetReqBean {
 
     public String signOut(){
         this.destroySession();
-        return "/index";
+        return "/index"+REDIRECT;
     }
 
     public String signUp(){

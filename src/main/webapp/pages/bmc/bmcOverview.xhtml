@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <ui:composition template="/template/projectTemplate.xhtml">
+    <ui:composition template="/template/mainTemplate.xhtml">
         <ui:param name="pageTitle" value="#{field.bmcOverview}"/>
         <ui:define name="metadata">
             <f:metadata>
@@ -25,82 +25,282 @@
 
                 <f:viewParam name="projectId" value="#{projectMemberController.projectId}"/>
 
+                <f:viewParam name="bmcId" value="#{segmentController.bmcId}"/>
+
             </f:metadata>
         </ui:define>
-        <ui:define name="content-center">
-            <div class="content-center">
+        <ui:define name="content">
+            #{segmentController.updateLists()}
+            <div class="bmcview">
                 <h:form>
-                    <h:panelGroup rendered="#{segmentContainerController.segmentContainerList.size() != 0}">
-                        <ui:repeat value="#{segmentContainerController.segmentContainerList}" var="segmentContainer">
-                            <div style="display: inline-block;margin-bottom: 20px;border-left:
-                                    solid black 1px;border-right: solid black 1px;">
-
-                                <h:panelGrid columns="2">
-                                    <h:outputText value="Customer Segment"/>
-                                    <h:outputText value="#{segmentContainer.getCustomerSegment().segmentTitle}"/>
-
-                                    <h:outputText value="Value Proposition"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(2)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Distibution Channel"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(3)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Customer Relationship"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(4)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Revenue Stream"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(5)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Key Resources"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(6)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Key Activities"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(7)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Key Partners"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(8)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-                                    <h:outputText value="Cost Structure"/>
-                                    <ui:repeat value="#{segmentContainer.getSegments(9)}" var="segment">
-                                        <h:outputText value="#{segment.segmentTitle}"/><br/>
-                                    </ui:repeat>
-
-
-                                </h:panelGrid>
-                                <h:commandButton value="#{field.edit}"
-                                                 action="#{editSegmentContainerController.editSegmentContainer(segmentContainer)}"/>
+                    <div class="bmc">
+                        <div class="d-flex justify-content-start">
+                            <h:commandButton styleClass="submit" value="Назад" var="projectMember"/>
+                            <button type="button" class="submit" data-toggle="modal" value="#{field.add}" data-target="#myModal">Добавить</button>
+                                <!--<h:commandButton styleClass="submit" data-toggle="modal" data-target="#myModal" value="#{field.add}" action="#{segmentContainerController.addSegmentContainer()}"/>-->
+                        </div>
+                        <div id="bmc">
+                            <div class="d-flex flex-column" style="height: 600px;">
+                                <div class="flex-4 d-flex">
+                                    <div class="segment flex-1 kp">
+                                        <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.kpList}" var="segment" >
+                                            <f:facet name="caption">
+                                                <div style="font-weight:600; text-align: center;">Ключевые партнеры</div>
+                                            </f:facet>
+                                            <h:column headerClass="table-header" footerClass="table-footer">
+                                                <h:outputText styleClass="segment-id-#{segment.segmentContainer.segmentContainerId}" style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </div>
+                                    <div class="d-flex flex-column flex-1">
+                                        <div class="segment flex-1 ka">
+                                            <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.kaList}" var="segment" >
+                                                <f:facet name="caption">
+                                                    <div style="font-weight:600; text-align: center;">Ключевые действия</div>
+                                                </f:facet>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                        <div class="segment flex-1 kr">
+                                            <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.krList}" var="segment" >
+                                                <f:facet name="caption">
+                                                    <div style="font-weight:600; text-align: center;">Ключевые ресурсы</div>
+                                                </f:facet>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                    </div>
+                                    <div class="segment flex-1 vp">
+                                        <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.vpList}" var="segment" >
+                                            <f:facet name="caption">
+                                                <div style="font-weight:600; text-align: center;">Ключевые ценности</div>
+                                            </f:facet>
+                                            <h:column headerClass="table-header" footerClass="table-footer">
+                                                <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </div>
+                                    <div class="d-flex flex-column flex-1">
+                                        <div class="segment flex-1 cr">
+                                            <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.crList}" var="segment" >
+                                                <f:facet name="caption">
+                                                    <div style="font-weight:600; text-align: center;">Взаимоотношения с клиентами</div>
+                                                </f:facet>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                        <div class="segment flex-1 ch">
+                                            <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.dsList}" var="segment" >
+                                                <f:facet name="caption">
+                                                    <div style="font-weight:600; text-align: center;">Каналы</div>
+                                                </f:facet>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                    </div>
+                                    <div class="segment flex-1 cus">
+                                        <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.csList}" var="segment" >
+                                            <f:facet name="caption">
+                                                <div style="font-weight:600; text-align: center;">Потребительский сегмент</div>
+                                            </f:facet>
+                                            <h:column headerClass="table-header" footerClass="table-footer">
+                                                <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </div>
+                                </div>
+                                <div class="flex-2">
+                                    <div class="d-flex" style="height: 80%;">
+                                        <div class="segment flex-1 cs">
+                                            <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.rsList}" var="segment" >
+                                                <f:facet name="caption">
+                                                    <div style="font-weight:600; text-align: center;">Структура расходов</div>
+                                                </f:facet>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                        <div class="segment flex-1 rs">
+                                            <h:dataTable styleClass="sidebar-table text-center" value="#{segmentController.costSList}" var="segment" >
+                                                <f:facet name="caption">
+                                                    <div style="font-weight:600; text-align: center;">Потоки доходов</div>
+                                                </f:facet>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <h:outputText style="text-align: center;" value="#{segment.segmentTitle}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <h:commandButton styleClass="submit" style="margin-bottom: 3%" value="#{field.finish} BMC" action="#{bmcController.finishBmc()}"/>
+                    </div>
+
+                    <h:panelGroup>
+                        <ui:repeat value="#{segmentContainerController.segmentContainerList}" var="segmentContainer">
+
                         </ui:repeat>
                     </h:panelGroup>
 
-                    <h:panelGroup rendered="#{segmentContainerController.segmentContainerList.size() == 0}">
-                        <h:outputText value="#{field.nothing}"/>
-                    </h:panelGroup>
-
-                    <h:panelGroup>
-                        <h:commandButton value="#{field.add}" action="#{segmentContainerController.addSegmentContainer()}"/>
-                    </h:panelGroup>
-
-                    <div class="right">
-                        <h:panelGroup styleClass="right">
-                            <h:commandButton value="#{field.finish} BMC" action="#{bmcController.finishBmc()}"/>
-                        </h:panelGroup>
-                    </div>
                 </h:form>
+            </div>
+            <div class="container-fluid">
+                <!-- Trigger the modal with a button -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <div class="d-flex justify-content-center">
+                                    <h:graphicImage library="main" name="images/logo.png" class="logo-bmc"/>
+                                </div>
+                                <h4 style="font-family: Calibri" class="modal-title">Бизнес Модель BMC</h4>
+                            </div>
+
+                            <div class="modal-body d-flex justify-content-center" style="margin-top: 2%">
+                                <h:form>
+                                    <h:panelGrid columns="3">
+                                        <h:outputText style="font-family: Calibri" value="Потребительский сегмент"/>
+                                        <h:inputText value="#{segmentContainerController.segmentContainer.getCustomerSegment().segmentTitle}"/>
+                                        <br/>
+
+                                        <h:outputText style="font-family: Calibri" value="Ключевые ценности"/>
+                                        <h:dataTable id="segmentTable" value="#{segmentContainerController.segmentContainer.vpList}" var="segment">
+                                            <h:column>
+                                                <h:inputText id="input-field" value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(2)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                                    />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Каналы"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.dsList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(3)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Взаимоотношения с клиентами"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.crList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(4)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Потоки доходов"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.rsList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(5)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Ключевые ресурсы"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.krList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(6)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Ключевые действия"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.kaList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(7)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Ключевые партнеры"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.kpList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(8)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                        <h:outputText style="font-family: Calibri" value="Структура доходов"/>
+                                        <h:dataTable value="#{segmentContainerController.segmentContainer.costSList}" var="segment">
+                                            <h:column>
+                                                <h:inputText value="#{segment.segmentTitle}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <h:commandButton styleClass="submit" value="Добавить" >
+                                            <f:ajax listener="#{segmentContainerController.addSegmentAjax(9)}"
+                                                    execute="@form"
+                                                    render="@form"
+                                            />
+                                        </h:commandButton>
+
+                                    </h:panelGrid>
+                                    <br/>
+                                    <div class="d-flex justify-content-center">
+                                        <h:commandButton styleClass="submit" value="#{field.add}" action="#{segmentContainerController.createSegmentContainer}"/>
+                                    </div>
+                                </h:form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </ui:define>
     </ui:composition>

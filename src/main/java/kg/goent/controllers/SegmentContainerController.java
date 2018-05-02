@@ -55,8 +55,14 @@ public class SegmentContainerController extends GetReqBean {
     }
 
     public String addSegment(int typeId){
+        System.out.println("add segment " + typeId);
         segmentContainer.addSegment(typeId);
         return ADD_SEGMENT_CONTAINER + REDIRECT+"projectId="+projectId+"&bmcId="+bmcId;
+    }
+
+    public void addSegmentAjax(int typeId){
+        System.out.println("addSegmentAjax " + typeId);
+        segmentContainer.addSegment(typeId);
     }
 
     public String createSegmentContainer(){

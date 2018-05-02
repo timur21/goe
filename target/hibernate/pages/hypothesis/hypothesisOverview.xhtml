@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <ui:composition template="/template/projectTemplate.xhtml">
+    <ui:composition template="/template/mainTemplate.xhtml">
         <ui:param name="pageTitle" value="Hypothesis"/>
         <ui:define name="metadata">
             <f:metadata>
@@ -24,54 +24,103 @@
                 <f:viewParam name="projectId" value="#{hypothesisContainerController.projectId}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="content-center">
-            <div class="content-center">
-                <ul>
-                    <h3>Customer Segement</h3>
-                    <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.csHypList}" var="hypothesis">
-                        <li>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==1}" style="background-color: lime"/>
-                        </li>
-                    </ui:repeat>
-                </ul>
-                <ul>
-                    <h3>Value Prop</h3>
-                    <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.vpHypList}" var="hypothesis">
-                        <li>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==1}" style="background-color: lime"/>
-                        </li>
-                    </ui:repeat>
-                </ul>
-                <ul>
-                    <h3>Distribution Channel</h3>
-                    <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.dcHypList}" var="hypothesis">
-                        <li>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==1}" style="background-color: lime"/>
-                        </li>
-                    </ui:repeat>
-                </ul>
-                <ul>
-                    <h3>Customer Relationship</h3>
-                    <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.crHypList}" var="hypothesis">
-                        <li>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
-                            <h:outputText value="#{hypothesis.segment.segmentTitle}"
-                                          rendered="#{hypothesis.status==1}" style="background-color: lime"/>
-                        </li>
-                    </ui:repeat>
-                </ul>
+        <ui:define name="content">
+            <div class="content-center hyp-table">
+                <h:panelGroup>
+                    <table class="order-table table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Потребительский сегмент</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="">
+                            <td style="width: fit-content">
+                                <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.csHypList}" var="hypothesis">
+                                    <li>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                    </li>
+                                </ui:repeat>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <table class="order-table table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Ценностное предложение</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="">
+                            <td>
+                                <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.vpHypList}" var="hypothesis">
+                                    <li>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                    </li>
+                                </ui:repeat>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <table class="order-table table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Каналы</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="">
+                            <td>
+                                <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.dcHypList}" var="hypothesis">
+                                    <li>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                    </li>
+                                </ui:repeat>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <table class="order-table table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Взаимоотношение с клиентом</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="">
+                            <td>
+                                <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.crHypList}" var="hypothesis">
+                                    <li>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                        <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                      rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                    </li>
+                                </ui:repeat>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+
                 <h:form>
-                    <h:commandButton value="#{field.refresh}" action="#{hypothesisContainerController.refreshHypothesisList()}"/>
+                    <h:commandButton styleClass="submit" value="#{field.refresh}" action="#{hypothesisContainerController.refreshHypothesisList()}"/>
                 </h:form>
             </div>
         </ui:define>

@@ -6,8 +6,43 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition>
-    <div class="content-left">
+    <div class="container-fluid">
+        <div class="">
+            <div class="">
+                <div class="sidebar">
+                        <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getTeamLeader()}" var="projectMember" columnClasses="text-center" rowClasses="" >
+                            <f:facet name="caption">
+                                <div style="font-weight:600; text-align: center;">Капитан команды</div>
+                            </f:facet>
 
+                            <h:column headerClass="table-header" footerClass="table-footer">#{projectMember.user.fname} #{projectMember.user.lname}</h:column>
+                        </h:dataTable>
+                    <hr/>
+                    <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getTeamMembers()}" var="projectMember" >
+                        <f:facet name="caption">
+                            <div style="font-weight:600; text-align: center;">Члены команды</div>
+                        </f:facet>
+                        <h:column headerClass="table-header" footerClass="table-footer">
+                            <h:outputText styleClass="team-data" style="text-align: center;" value="#{projectMember.user.fname} #{projectMember.user.lname}"
+                                          rendered="#{projectMember.memberRole.memberRoleId == 2}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <hr/>
+                    <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getObservers()}" var="projectMember" >
+                        <f:facet name="caption">
+                            <div style="font-weight:600; text-align: center;">Наблюдатели</div>
+                        </f:facet>
+                        <h:column headerClass="table-header" footerClass="table-footer">
+                            <h:outputText styleClass="observer-data" style="text-align: center;" value="#{projectMember.user.fname} #{projectMember.user.lname}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <br/>
+                    <h:form styleClass="sidebar-table text-center">
+                        <h:commandButton styleClass="submit sidebar-table text-center" style="width: fit-content" value="#{field.addMember}" action="#{projectMemberController.addMember()}"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
     </div>
 </ui:composition>
 </html>

@@ -45,77 +45,79 @@
                 <h:form>
 
                     <h:panelGrid columns="3">
-                        <h:outputText value="Customer Segment"/>
+                        <h:outputText style="font-family: Calibri" value="Сегменты потребителей"/>
                         <h:inputText value="#{segmentContainerController.segmentContainer.getCustomerSegment().segmentTitle}"/>
                         <br/>
 
-                            <h:outputText value="Value Proposition"/>
-                        <h:dataTable value="#{segmentContainerController.segmentContainer.vpList}" var="segment">
+                        <h:outputText style="font-family: Calibri" value="Ключевые ценности"/>
+                        <h:dataTable id="segmentTable" value="#{segmentContainerController.segmentContainer.vpList}" var="segment">
                             <h:column>
-                                <h:inputText value="#{segment.segmentTitle}"/>
+                                <h:inputText id="input-field" value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(2)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(2)}">
+                            <f:ajax execute="input-field" render="segmentTable"/>
+                        </h:commandButton>
 
-                        <h:outputText value="Distibution Channel"/>
+                        <h:outputText style="font-family: Calibri" value="Каналы"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.dsList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(3)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(3)}" />
 
-                        <h:outputText value="Customer Relationship"/>
+                        <h:outputText style="font-family: Calibri" value="Взаимоотношения с клиентами"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.crList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(4)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(4)}" />
 
-                        <h:outputText value="Revenue Stream"/>
+                        <h:outputText style="font-family: Calibri" value="Потоки доходов"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.rsList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(5)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(5)}" />
 
-                        <h:outputText value="Key Resources"/>
+                        <h:outputText style="font-family: Calibri" value="Ключевые ресурсы"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.krList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(6)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(6)}" />
 
-                        <h:outputText value="Key Activities"/>
+                        <h:outputText style="font-family: Calibri" value="Ключевые действия"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.kaList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(7)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(7)}" />
 
-                        <h:outputText value="Key Partners"/>
+                        <h:outputText style="font-family: Calibri" value="Ключевые партнеры"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.kpList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(8)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(8)}" />
 
-                        <h:outputText value="Cost Structure"/>
+                        <h:outputText style="font-family: Calibri" value="Структура доходов"/>
                         <h:dataTable value="#{segmentContainerController.segmentContainer.costSList}" var="segment">
                             <h:column>
                                 <h:inputText value="#{segment.segmentTitle}"/>
                             </h:column>
                         </h:dataTable>
-                        <h:commandButton value="Add" action="#{segmentContainerController.addSegment(9)}" />
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{segmentContainerController.addSegment(9)}" />
 
                     </h:panelGrid>
                     <br/>
-                    <h:commandButton value="#{field.add}" action="#{segmentContainerController.createSegmentContainer}"/>
+                    <h:commandButton styleClass="submit" value="#{field.add}" action="#{segmentContainerController.createSegmentContainer}"/>
                 </h:form>
             </div>
         </ui:define>

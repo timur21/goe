@@ -9,78 +9,95 @@
     <title>Registration</title>
 </h:head>
     <h:body>
-        <ui:composition template="/template/template.xhtml">
-            <ui:param name="pageTitle" value="Sign up"/>
-            <ui:define name="content-center">
-                <div class="content-center">
-                    <div class="center">
-                        <h2>Please your data</h2>
-                    </div>
 
-                    <h:form >
-                        <h:panelGrid columns="2">
-                            <h:outputText value="First Name:"/>
-                            <h:panelGroup>
-                                <h:inputText id="fnameInput" value="#{userController.user.fname}" required="true">
+        <ui:composition template="/template/regTemplate.xhtml">
+            <ui:param name="pageTitle" value="Sign up"/>
+            <ui:define name="content">
+                <div class="container-login100">
+                    <div class="wrap-login100">
+                        <h:form styleClass="">
+
+                            <h:panelGroup styleClass="login100-form-title p-b-26">
+                                Регистрация
+                            </h:panelGroup>
+
+                            <!---->
+
+                            <div class="wrap-input100 validate-input">
+                                <h:inputText styleClass="input100" color="white" type="text" id="fnameInput" value="#{userController.user.fname}" required="true">
                                     <f:ajax event="blur">
                                         <f:validateRegex pattern = "[a-zA-Z]{2,50}$" />
                                     </f:ajax>
                                 </h:inputText>
                                 <h:message for="fnameInput" style="color:red"/>
-                            </h:panelGroup>
+                                <span class="focus-input100" data-placeholder="Имя"></span>
+                            </div>
 
-                            <h:outputText value="Last Name:"/>
-                            <h:panelGroup>
-                                <h:inputText id="lnameInput" value="#{userController.user.lname}" required="true">
+                            <div class="wrap-input100 validate-input" data-validate="Введите фамилие">
+                                <h:inputText styleClass="input100" color="white" type="text" id="lnameInput" value="#{userController.user.lname}" required="true">
                                     <f:ajax event="blur">
                                         <f:validateRegex pattern = "[a-zA-Z]{2,50}$" />
                                         <f:validateLength minimum="2"/>
                                     </f:ajax>
                                 </h:inputText>
                                 <h:message for="lnameInput" style="color:red"/>
-                            </h:panelGroup>
+                                <span class="focus-input100" data-placeholder="Фамилия"></span>
+                            </div>
 
-                            <h:outputText value="E-mail:"/>
-                            <h:panelGroup>
-                                <h:inputText id="emailInput" value="#{userController.user.email}" required="true">
+                            <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                                <h:inputText styleClass="input100" color="white" type="text" id="emailInput" value="#{userController.user.email}" required="true">
                                     <f:ajax event="blur">
                                         <f:validator validatorId="emailValidator"/>
                                     </f:ajax>
                                 </h:inputText>
                                 <h:message for="emailInput" style="color:red" showSummary="true" showDetail="false"/>
-                            </h:panelGroup>
+                                <span class="focus-input100" data-placeholder="Почтовый адрес"></span>
+                            </div>
 
-                            <h:outputText value="Password:"/>
-                            <h:panelGroup>
-                                <h:inputSecret id = "passwordInput" value = "#{userController.user.password}"
-                                               label = "password" required="true" >
+                            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                <span class="btn-show-pass">
+                                    <i class="zmdi zmdi-eye"></i>
+                                </span>
+                                <h:inputSecret styleClass="input100" type="password" id = "passwordInput" value = "#{userController.user.password}"
+                                               label = "password" required="true">
                                     <f:ajax event="blur"/>
                                     <f:validateLength minimum="4" maximum="13"/>
                                     <f:validator validatorId="passwordValidator"/>
                                     <f:attribute name="confirmPassword" value="#{confirmPassword}"/>
                                 </h:inputSecret>
                                 <h:message for = "passwordInput" style = "color:red" />
-                            </h:panelGroup>
+                                <span class="focus-input100" data-placeholder="Пароль"></span>
+                            </div>
 
-                            <h:outputText value="Confirm Password:"/>
-                            <h:panelGroup>
-                                <h:inputSecret id="confirmPasswordInput" binding="#{confirmPassword}">
+                            <div class="wrap-input100 validate-input" data-validate="Confirm password">
+                                <span class="btn-show-pass">
+                                    <i class="zmdi zmdi-eye"></i>
+                                </span>
+                                <h:inputSecret styleClass="input100" type="password" id="confirmPasswordInput" binding="#{confirmPassword}">
                                     <f:ajax event="blur"/>
                                 </h:inputSecret>
                                 <h:message for="confirmPasswordInput" style="color:red"/>
-                            </h:panelGroup>
+                                <span class="focus-input100" data-placeholder="Подтверждение пароля"></span>
+                            </div>
 
-                            <h:outputText value="Phone"/>
-                            <h:inputText id="phone" value="#{userController.user.phone}" />
+                            <div class="wrap-input100 validate-input" data-validate="Enter Phone Number">
+                                <h:inputText styleClass="input100" color="white" type="text" id="phone" value="#{userController.user.phone}"/>
+                                <span class="focus-input100" data-placeholder="Номер телефона"></span>
+                            </div>
 
-                            <h:commandButton value="Submit" action="#{userController.signUp}"/>
-                        </h:panelGrid>
-                        <h:messages errorClass="errorMessage" infoClass="infoMessage"
-                                                  layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
-                    </h:form>
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <h:commandButton class="login100-form-btn cmd-btn" value="Регистрация" action="#{userController.signUp}"/>
+                                </div>
+                            </div>
+                            <h:messages errorClass="errorMessage" infoClass="infoMessage"
+                                        layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
+
+                        </h:form>
+                    </div>
                 </div>
             </ui:define>
-            <h:link value="index" outcome="index"/>
         </ui:composition>
     </h:body>
 </html>

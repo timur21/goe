@@ -1,6 +1,8 @@
 package kg.goent.controllers;
 
 import kg.goent.facade.*;
+import kg.goent.facade.bmc.BmcFacade;
+import kg.goent.facade.bmc.BmcStatusFacade;
 import kg.goent.facade.project.ProjectFacade;
 import kg.goent.facade.project.ProjectMemberFacade;
 import kg.goent.facade.project.ProjectStatusFacade;
@@ -16,6 +18,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.util.Date;
 import java.util.List;
+
+import static kg.goent.tools.ViewPath.PROJECT_OVERVIEW;
+import static kg.goent.tools.ViewPath.REDIRECT;
 
 /**
  * Created by timur on 4/20/2017.
@@ -68,7 +73,7 @@ public class ProjectController extends GetReqBean {
     }
 
     public String addProject(){
-        return ViewPath.ADD_PROJECT;
+        return ViewPath.ADD_PROJECT + ViewPath.REDIRECT;
     }
 
     public String createProject(){

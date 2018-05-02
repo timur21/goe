@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body style="background-color: #CCECFB">
+    <ui:composition template="template/tutorialTemplate.xhtml">
+        <ui:define name="preScripts">
+        </ui:define>
+        <ui:define name="sidebar-left">
+            <!--<h1>sidebar is defined</h1>-->
+        </ui:define>
+        <ui:define name="content">
+            <div id="fullpage">
+                <div class="section" id="section0">
+
+                    <div class="d-flex justify-content-around">
+                        <div class="flex-1 d-flex justify-content-center">
+                            <div class="video1 hometext d-flex flex-column justify-content-around">
+                                <h1 class="align-self-center">Добро пожаловать в</h1>
+                                <h:graphicImage styleClass="align-self-center" library="tutorial" name="images/logo.png" style="height:150px; width:230px;"/>
+                            </div>
+                        </div>
+                        <div class="video1 flex-1 d-flex justify-content-center">
+                            <video controls="" style="width:90%;height: 90%;">
+                                <source src="#{viewPath.TUTORIAL_MAIN_VIDEO}" type="video/mp4"/>
+                                <!--<source src="/hibernate/javax.faces.resource/audios/a-working-man.ogg" type="video/ogg"/>-->
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="section" id="section2">
+
+                    <div class="d-flex justify-content-around section-content">
+                        <div class="flex-1 d-flex flex-column justify-content-center">
+                            <div class="video2 hometext d-flex flex-column align-self-center full-height">
+                                <div class="flex-1 d-flex flex-column align-items-center">
+                                    <h1 id="phrase1">НАЧНИТЕ С ПРОСТОЙ ИДЕИ</h1>
+                                    <p style="font-family: Garamond; color: white;"><i>Идея может стать личностью. (Мигель де Унамуно)</i></p>
+                                </div>
+                                <div class="flex-2 d-flex flex-column align-items-center">
+                                    <video controls="" style="width:60%;height: 70%;">
+                                        <source src="#{viewPath.TUTORIAL_MAIN_VIDEO}" type="video/mp4"/>
+                                        <!--<source src="/hibernate/javax.faces.resource/audios/a-working-man.ogg" type="video/ogg"/>-->
+                                        Your browser does not support HTML5 video.
+                                    </video>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex-1 d-flex video1">
+                            <!--<h3>flex text</h3>-->
+                            <h:graphicImage styleClass="full-width" library="tutorial" name="images/draft.svg" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--  -->
+
+                <div class="section" id="section3">
+
+                    <div class="d-flex justify-content-around section-content">
+                        <div class="flex-1 d-flex video1">
+                            <!--<h3>flex text</h3>-->
+                            <h:graphicImage styleClass="full-width" library="tutorial" name="images/draft1.svg" />
+                        </div>
+
+                        <div class="flex-1 d-flex flex-column justify-content-center">
+                            <div class="video3 hometext d-flex flex-column align-self-center full-height">
+                                <div class="flex-1 d-flex flex-column align-items-center">
+                                    <h1 id="phrase1">РАЗВИВАЙТЕ ИДЕЮ</h1>
+                                    <p style="font-family: Garamond; color: white;"><i>Прогресс - не случайность, а необходимость. (Герберт Спенсер)</i></p>
+                                </div>
+                                <div class="flex-2 d-flex flex-column align-items-center">
+                                    <video controls="" style="width:60%;height: 70%;">
+                                        <source src="#{viewPath.TUTORIAL_MAIN_VIDEO}" type="video/mp4"/>
+                                        <!--<source src="/hibernate/javax.faces.resource/audios/a-working-man.ogg" type="video/ogg"/>-->
+                                        Your browser does not support HTML5 video.
+                                    </video>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="section" id="section4">
+                    <div class="d-flex justify-content-around section-content">
+                        <div class="flex-1 d-flex flex-column justify-content-center">
+                            <div class="video4 hometext d-flex flex-column align-self-center full-height">
+                                <div class="flex-1 d-flex flex-column align-items-center">
+                                    <h1 id="phrase1">ИССЛЕДУЙТЕ РЫНОК</h1>
+                                    <p style="font-family: Garamond; color: white;"><i>Ваши самые несчастные клиенты - это ваш самый главный<br></br> источник для изучения. (Билл Гейтс)</i></p>
+                                </div>
+                                <div class="flex-2 d-flex flex-column align-items-center">
+                                    <video controls="" style="width:60%;height: 70%;">
+                                        <source src="#{viewPath.TUTORIAL_MAIN_VIDEO}" type="video/mp4"/>
+                                        <!--<source src="/hibernate/javax.faces.resource/audios/a-working-man.ogg" type="video/ogg"/>-->
+                                        Your browser does not support HTML5 video.
+                                    </video>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex-1 d-flex video1">
+                            <!--<h3>flex text</h3>-->
+                            <h:graphicImage styleClass="full-width" library="tutorial" name="images/draft2.svg" />
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="section" id="section5">
+
+                    <div class="d-flex justify-content-around section-content">
+                        <div class="flex-1 d-flex video1">
+                            <!--<h3>flex text</h3>-->
+                            <h:graphicImage styleClass="full-width" library="tutorial" name="images/draft3.svg" />
+                        </div>
+
+                        <div class="flex-1 d-flex flex-column justify-content-center">
+                            <div class="video5 hometext d-flex flex-column align-self-center full-height">
+                                <div class="flex-1 d-flex flex-column align-items-center">
+                                    <h1 id="phrase1">ГИБКОЕ РАЗВИТИЕ</h1>
+                                    <p style="font-family: Garamond; color: white;"><i>Довольный клиент - это лучшая бизнес-стратегия.</i></p>
+                                </div>
+                                <div class="flex-2 d-flex flex-column align-items-center">
+                                    <video controls="" style="width:60%;height: 70%;">
+                                        <source src="#{viewPath.TUTORIAL_MAIN_VIDEO}" type="video/mp4"/>
+                                        <!--<source src="/hibernate/javax.faces.resource/audios/a-working-man.ogg" type="video/ogg"/>-->
+                                        Your browser does not support HTML5 video.
+                                    </video>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="section" id="section6">
+
+                    <div class="d-flex justify-content-around section-content">
+
+                        <div class="flex-1 d-flex flex-column lasttext align-items-center">
+                            <p style="font-family: Garamond; color: #0D84B9; font-size: 1.5em;"><i>Начало есть более чем половина всего.<br></br>(Аристотель)</i></p>
+
+                        </div>
+                        <div class="flex-2 d-flex laptop1">
+                            <div class="flex-1 d-flex">
+                                <!--<h3>flex text</h3>-->
+                                <h:graphicImage styleClass="laptop" library="tutorial" name="images/draft.png" />
+                                <!--<h:graphicImage styleClass="start" library="tutorial" name="images/start.png"/>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ui:define>
+
+        <ui:define name="preScripts">
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#fullpage').fullpage({
+                        sectionsColor: ['white', '#91D8F7', '#FBE91F', '#A8CF45', '#7A75B5'],
+                        anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', '5thpage', 'lastpage'],
+                        menu: '#menu',
+                    });
+                });
+            </script>
+            <style>
+                #section0{
+                    background-image: url('/hibernate/javax.faces.resource/images/home5.jpg.xhtml?ln=tutorial');
+                    background-size: cover;
+                }
+            </style>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

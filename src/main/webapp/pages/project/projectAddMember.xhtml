@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
 
-    <ui:composition template="/template/projectTemplate.xhtml">
+    <ui:composition template="/template/mainTemplate.xhtml">
         <ui:param name="pageTitle" value="Add members"/>
         <ui:define name="metadata">
             <f:metadata>
@@ -24,17 +24,19 @@
             </f:metadata>
         </ui:define>
 
-        <ui:define name="content-center">
-            <div class="content-center">
-                <h:outputText value="project: '#{projectController.project.title}'"/>
+        <ui:define name="content">
+            <div class="content-center form project-member">
+                <h:outputText value="Project: '#{projectController.project.title}'"/>
+                <br/>
                 <h:panelGroup rendered="#{projectController.project != null}">
                     <h:dataTable value="#{projectSession.project.memberList}" var="projectMember" >
-                        <f:facet name="caption">
-                            TEAM
-                        </f:facet>
+                        <!--<f:facet name="caption">-->
+                            <!--TEAM-->
+                        <!--</f:facet>-->
+
                         <h:column headerClass="table-header" footerClass="table-footer">
                             <f:facet name="header">
-                                ФИО
+                                Email
                             </f:facet>
                             <h:outputText value="#{projectMember.user.fname} #{projectMember.user.lname}"/>
                         </h:column>
@@ -42,12 +44,12 @@
                     <h:form>
                         <h:inputText value="#{projectMemberController.userEmail}"/>
 
-                        <h:selectOneMenu value="#{projectMemberController.memberRole}">
+                        <h:selectOneMenu style="border-radius: 5px;" value="#{projectMemberController.memberRole}">
                             <f:selectItems value="#{projectMemberController.findAllSimpleUsers()}"/>
                         </h:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Submit" action="#{projectMemberController.createMember()}"/>
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{projectMemberController.createMember()}"/>
                         <br/>
 
                         <h:messages errorClass="errorMessage" infoClass="infoMessage"
