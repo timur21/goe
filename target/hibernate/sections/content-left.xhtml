@@ -12,7 +12,7 @@
                 <div class="sidebar">
                         <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getTeamLeader()}" var="projectMember" columnClasses="text-center" rowClasses="" >
                             <f:facet name="caption">
-                                <div style="font-weight:600; text-align: center;">Капитан команды</div>
+                                <div style="font-weight:600; text-align: center;">Менеджер проекта</div>
                             </f:facet>
 
                             <h:column headerClass="table-header" footerClass="table-footer">#{projectMember.user.fname} #{projectMember.user.lname}</h:column>

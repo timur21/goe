@@ -21,9 +21,7 @@ import java.util.List;
 
 import static kg.goent.tools.ViewPath.*;
 
-/**
- * Created by azire on 5/13/2017.
- */
+
 @ManagedBean
 @ViewScoped
 public class HypothesisContainerController extends GetReqBean {

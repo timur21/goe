@@ -141,6 +141,10 @@ public class ProjectController extends GetReqBean {
         return "";
     }
 
+    public String projectOverView(){
+        return ViewPath.PROJECT_OVERVIEW + ViewPath.REDIRECT+"projectId="+projectId;
+    }
+
     public String projectOverView(Project project){
         return ViewPath.PROJECT_OVERVIEW + ViewPath.REDIRECT+"projectId="+project.getProjectId();
     }
@@ -158,4 +162,6 @@ public class ProjectController extends GetReqBean {
         }
         return hasAcccess;
     }
+
+
 }

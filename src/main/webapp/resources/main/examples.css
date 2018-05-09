@@ -103,6 +103,9 @@ form,fieldset,input,textarea,p,blockquote,th,td {
 .hyp-table{
     width: fit-content;
 }
+.question-form{
+    display: inline;
+}
 
 /*.form input{*/
   /*margin-left: 15%;*/
@@ -467,6 +470,12 @@ body{
 }
 .bmc{
 	/*position: fixed;*/
+}
+
+.analysis-form{
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
 }
 
 .fp-tableCell{

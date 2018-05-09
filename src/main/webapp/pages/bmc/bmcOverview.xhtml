@@ -35,7 +35,10 @@
                 <h:form>
                     <div class="bmc">
                         <div class="d-flex justify-content-start">
-                            <h:commandButton styleClass="submit" value="Назад" var="projectMember"/>
+                            <!--<h:commandLink action="#{projectController.projectOverView()}">-->
+                                    <!--<h:graphicImage style="margin-right: 10px;" library="main" name="images/left3.png"/>-->
+                            <!--</h:commandLink>-->
+                            <h:commandButton styleClass="submit" value="Назад" action="#{projectController.projectOverView()}"/>
                             <button type="button" class="submit" data-toggle="modal" value="#{field.add}" data-target="#myModal">Добавить</button>
                                 <!--<h:commandButton styleClass="submit" data-toggle="modal" data-target="#myModal" value="#{field.add}" action="#{segmentContainerController.addSegmentContainer()}"/>-->
                         </div>

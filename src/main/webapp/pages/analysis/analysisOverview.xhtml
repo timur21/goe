@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"  >
+<f:view>
+    <ui:composition template="/template/mainTemplate.xhtml">
+        <ui:param name="pageTitle" value="Analysis Overview"/>
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+                <f:viewParam name="projectId" value="#{projectMemberController.projectId}"/>
+            </f:metadata>
+        </ui:define>
+        <ui:define name="content">
+            <div class="content-left">
+
+            </div>
+        </ui:define>
+        <ui:define name="content">
+            <div class="content-center analysis-form">
+                <h2 style="color:#00A5DE; font-family:Calibri;">Статистический анализ</h2>
+                <p:chart type="line" model="#{chartView.areaModel}" style="height:400px" />
+                <div class="d-flex justify-content-start">
+                    <!--<h:commandLink action="#{projectController.projectOverView()}">-->
+                    <!--<h:graphicImage style="margin-right: 10px;" library="main" name="images/left3.png"/>-->
+                    <!--</h:commandLink>-->
+                    <h:commandButton styleClass="submit" value="Добавить"/>
+                    <h:commandButton styleClass="submit" value="Редактировать"/>
+                </div>
+            </div>
+
+        </ui:define>
+        <ui:define name="jquery"/>
+    </ui:composition>
+</f:view>
+</html>

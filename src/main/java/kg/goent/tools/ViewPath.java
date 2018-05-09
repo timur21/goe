@@ -25,7 +25,13 @@ public class ViewPath {
         ADD_PROJECT = PROJECT_FOLDER +"/addProject?",
 
     HYPOTHESIS_FOLDER = "/pages/hypothesis",
-        HYPOTHESIS_OVERVIEW = HYPOTHESIS_FOLDER+"/hypothesisOverview?";
+        HYPOTHESIS_OVERVIEW = HYPOTHESIS_FOLDER+"/hypothesisOverview?",
+
+    QUESTIONNAIRE_FOLDER = "/pages/questionnaire/",
+        QUESTIONNAIRE_OVERVIEW = QUESTIONNAIRE_FOLDER + "QuestionnaireOverview?",
+
+    ANALYSIS_FOLDER = "/pages/analysis/",
+    ANALYSIS_OVERVIEW = ANALYSIS_FOLDER + "analysisOverview?";
 
     public static final String REDIRECT = "faces-redirect=true&";
 

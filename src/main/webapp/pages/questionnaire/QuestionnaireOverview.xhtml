@@ -6,17 +6,204 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <ui:composition template="/template/template.xhtml">
+    <ui:composition template="/template/mainTemplate.xhtml">
         <ui:param name="pageTitle" value="Questionnaire Overview"/>
         <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+                <f:viewParam name="projectId" value="#{projectMemberController.projectId}"/>
+            </f:metadata>
         </ui:define>
         <ui:define name="content-left">
             <div class="content-left">
 
             </div>
         </ui:define>
-        <ui:define name="content-center">
-            <div class="content-center">
+        <ui:define name="content">
+            <div class="content-center question-form">
+
+                <h:form style="background-color: white; border-radius: 5px; padding: 20px;">
+                    <h2 style="color:#00A5DE; font-family:Calibri;">Опрос потребителей</h2>
+                    <br/>
+                    <br/>
+                    <br/>
+                        <h:panelGrid columns="3">
+                            <h:outputText style="font-family: Calibri" value="Потребительский сегмент"/>
+                            <h:inputText value="#{segmentContainerController.segmentContainer.getCustomerSegment().segmentTitle}"/>
+                            <br/>
+
+                            <h:outputText style="font-family: Calibri" value="Ключевые ценности"/>
+                            <h:dataTable id="segmentTable" value="#{segmentContainerController.segmentContainer.vpList}" var="segment">
+                                <h:column>
+                                    <h:inputText id="input-field" value="#{segment.segmentTitle}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:commandButton styleClass="submit" value="Добавить" >
+                                <f:ajax listener="#{segmentContainerController.addSegmentAjax(2)}"
+                                        execute="@form"
+                                        render="@form"
+                                />
+                            </h:commandButton>
+
+                            <h:outputText style="font-family: Calibri" value="Каналы"/>
+                            <h:dataTable value="#{segmentContainerController.segmentContainer.dsList}" var="segment">
+                                <h:column>
+                                    <h:inputText value="#{segment.segmentTitle}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:commandButton styleClass="submit" value="Добавить" >
+                                <f:ajax listener="#{segmentContainerController.addSegmentAjax(3)}"
+                                        execute="@form"
+                                        render="@form"
+                                />
+                            </h:commandButton>
+
+                            <h:outputText style="font-family: Calibri" value="Взаимоотношения с клиентами"/>
+                            <h:dataTable value="#{segmentContainerController.segmentContainer.crList}" var="segment">
+                                <h:column>
+                                    <h:inputText value="#{segment.segmentTitle}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:commandButton styleClass="submit" value="Добавить" >
+                                <f:ajax listener="#{segmentContainerController.addSegmentAjax(4)}"
+                                        execute="@form"
+                                        render="@form"
+                                />
+                            </h:commandButton>
+
+                        </h:panelGrid>
+                        <br/>
+                        <div class="d-flex justify-content-center">
+                            <h:commandButton styleClass="submit" value="#{field.add}" action="#{segmentContainerController.createSegmentContainer}"/>
+                        </div>
+
+
+                    <div class="d-flex justify-content-center">
+                        <h:inputText value="#{projectMemberController.userEmail}"/>
+
+                        <h:selectOneMenu style="border-radius: 5px;">
+                            <f:selectItems/>
+                        </h:selectOneMenu>
+
+                        <br/>
+                        <h:commandButton styleClass="submit" value="Добавить" action="#{projectMemberController.createMember()}"/>
+                        <br/>
+
+                        <h:messages errorClass="errorMessage" infoClass="infoMessage"
+                                    layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
+
+                        <ui:remove>
+                            <div id="users" >
+
+                            </div>
+                            <ul>
+                                <ui:repeat value="#{userController.searchByEmailTop5(projectMemberController.userEmail)}" var="possibleUsers">
+                                    <h:outputText value="searching for: '#{projectMemberController.userEmail}'"/>
+                                    <li><h:outputText value="#{possibleUsers.email}" >
+                                    </h:outputText> </li>
+                                </ui:repeat>
+                            </ul>
+                        </ui:remove>
+                    </div>
+
+                    <div class="content-center hyp-table">
+                        <h:panelGroup>
+                            <table class="order-table table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Потребительский сегмент</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="">
+
+                                    <td style="text-align: center; font-family:Calibri;">Вопрос 1</td>
+                                </tr>
+                                <tr class="">
+
+                                    <td style="text-align: center; font-family:Calibri;">Вопрос 2</td>
+                                </tr>
+                                <tr class="">
+
+                                    <td style="text-align: center; font-family:Calibri;">Вопрос 3</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <table class="order-table table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Ценностное предложение</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="">
+                                    <td>
+                                        <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.vpHypList}" var="hypothesis">
+                                            <li>
+                                                <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                              rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                                <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                              rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                            </li>
+                                        </ui:repeat>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <table class="order-table table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Каналы</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="">
+                                    <td>
+                                        <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.dcHypList}" var="hypothesis">
+                                            <li>
+                                                <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                              rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                                <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                              rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                            </li>
+                                        </ui:repeat>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <table class="order-table table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <td style="color:#00A5DE; text-align: center; font-family:Calibri;">Взаимоотношение с клиентом</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="">
+                                    <td>
+                                        <ui:repeat value="#{hypothesisContainerController.hypothesisContainer.crHypList}" var="hypothesis">
+                                            <li>
+                                                <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                              rendered="#{hypothesis.status==0}" style="background-color: yellow"/>
+                                                <h:outputText value="#{hypothesis.segment.segmentTitle}"
+                                                              rendered="#{hypothesis.status==1}" style="background-color: lime"/>
+                                            </li>
+                                        </ui:repeat>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </h:panelGroup>
+
+                    </div>
+
+                </h:form>
 
             </div>
         </ui:define>

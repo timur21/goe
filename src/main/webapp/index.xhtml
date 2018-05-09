@@ -14,72 +14,74 @@
             <ui:define name="content">
 
                 <div class="content-center">
-                    <div class="project-panel">
-                        <h:panelGroup rendered="#{sessionController.user != null and sessionController.user.activationKey == ''}">
-                            <div class="user-info">
-                                <h2 style="color:#00A5DE; text-align: center; font-family:Calibri;">Админ</h2>
-                                <table class="order-table table table-bordered table-hover">
-                                    <tbody>
-                                    <tr class="">
-                                        <td>ID</td>
-                                        <td>#{sessionController.user.userId}</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>First name</td>
-                                        <td>#{sessionController.user.fname}</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Last name</td>
-                                        <td>#{sessionController.user.lname}</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Email</td>
-                                        <td>#{sessionController.user.email}</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Phone</td>
-                                        <td>#{sessionController.user.phoneF()}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
 
-                        </h:panelGroup>
-                        <br/><br/>
-                        <h:panelGroup rendered="#{sessionController.logged and sessionController.user.activationKey.length() == 0}">
-                            <div class="project-list">
-                                <h2 style="color:#00A5DE; text-align: center; font-family:Calibri;">Проекты</h2>
-                                <h:panelGroup rendered="#{projectMemberController.getAllProjectMembers().size() != 0}">
-                                    <h:form>
-                                        <h:dataTable styleClass=" project-class order-table table table-bordered table-hover" value="#{projectMemberController.getAllProjectMembers()}" var="projectMember" border="1">
-                                            <h:column headerClass="table-header" footerClass="table-footer">
-                                                <f:facet name="header">
-                                                    Название
-                                                </f:facet>
-                                                <h:commandLink value="#{projectMember.project.title}"
-                                                               action="#{projectController.projectOverView(projectMember.project)}"/>
-                                            </h:column>
+                    <h:panelGroup rendered="#{sessionController.user != null and sessionController.user.activationKey == ''}">
+                        <div class="project-panel">
+                                <div class="user-info">
+                                    <h2 style="color:#00A5DE; text-align: center; font-family:Calibri;">Пользователь</h2>
+                                    <table class="order-table table table-bordered table-hover">
+                                        <tbody>
+                                        <tr class="">
+                                            <td>ID</td>
+                                            <td>#{sessionController.user.userId}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td>First name</td>
+                                            <td>#{sessionController.user.fname}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td>Last name</td>
+                                            <td>#{sessionController.user.lname}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td>Email</td>
+                                            <td>#{sessionController.user.email}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td>Phone</td>
+                                            <td>#{sessionController.user.phoneF()}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                            <h:column headerClass="table-header" footerClass="table-footer">
-                                                <f:facet name="header">
-                                                    Описание
-                                                </f:facet>
-                                                <h:outputText value="#{projectMember.project.description}"/>
-                                            </h:column>
+                            <br/><br/>
+                            <h:panelGroup rendered="#{sessionController.logged and sessionController.user.activationKey.length() == 0}">
+                                <div class="project-list">
+                                    <h2 style="color:#00A5DE; text-align: center; font-family:Calibri;">Проекты</h2>
+                                    <h:panelGroup rendered="#{projectMemberController.getAllProjectMembers().size() != 0}">
+                                        <h:form>
+                                            <h:dataTable styleClass=" project-class order-table table table-bordered table-hover" value="#{projectMemberController.getAllProjectMembers()}" var="projectMember" border="1">
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <f:facet name="header">
+                                                        Название
+                                                    </f:facet>
+                                                    <h:commandLink value="#{projectMember.project.title}"
+                                                                   action="#{projectController.projectOverView(projectMember.project)}"/>
+                                                </h:column>
 
-                                        </h:dataTable>
+                                                <h:column headerClass="table-header" footerClass="table-footer">
+                                                    <f:facet name="header">
+                                                        Описание
+                                                    </f:facet>
+                                                    <h:outputText value="#{projectMember.project.description}"/>
+                                                </h:column>
+
+                                            </h:dataTable>
+                                        </h:form>
+                                    </h:panelGroup>
+                                </div>
+                                <h:panelGroup>
+                                    <h:form styleClass="project-button">
+                                        <h:link styleClass="submit" style="text-decoration: none;" value="Создать проект" outcome="#{projectController.addProject()}"/><br/>
                                     </h:form>
                                 </h:panelGroup>
-                            </div>
-                            <h:panelGroup>
-                                <h:form styleClass="project-button">
-                                    <h:link styleClass="submit" style="text-decoration: none;" value="Создать проект" outcome="#{projectController.addProject()}"/><br/>
-                                </h:form>
                             </h:panelGroup>
-                        </h:panelGroup>
-                    </div>
-                    <h:panelGroup rendered="#{sessionController.user.projectMemberList.size() == 0}" var="projectMember">
+                        </div>
 
+                        <h:panelGroup rendered="#{sessionController.user.projectMemberList.size() == 0}" var="projectMember">
+
+                        </h:panelGroup>
                     </h:panelGroup>
                     <br/>
 

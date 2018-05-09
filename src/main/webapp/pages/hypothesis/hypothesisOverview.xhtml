@@ -25,6 +25,11 @@
             </f:metadata>
         </ui:define>
         <ui:define name="content">
+            <div class="d-flex justify-content-start">
+                <h:form>
+                    <h:commandButton styleClass="submit" value="Назад" action="#{projectController.projectOverView()}"/>
+                </h:form>
+            </div>
             <div class="content-center hyp-table">
                 <h:panelGroup>
                     <table class="order-table table table-bordered table-hover">
