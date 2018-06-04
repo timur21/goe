@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int questionTypeId;
+    private Integer questionTypeId;
     @Column
     private String questionType;
 
@@ -28,11 +28,11 @@ public class QuestionType {
         this.questionType = questionType;
     }
 
-    public int getQuestionTypeId() {
+    public Integer getQuestionTypeId() {
         return questionTypeId;
     }
 
-    public void setQuestionTypeId(int questionTypeId) {
+    public void setQuestionTypeId(Integer questionTypeId) {
         this.questionTypeId = questionTypeId;
     }
 
@@ -50,5 +50,10 @@ public class QuestionType {
 
     public void setQuestion(List<Question> question) {
         this.question = question;
+    }
+
+    @Override
+    public String toString() {
+        return questionType;
     }
 }

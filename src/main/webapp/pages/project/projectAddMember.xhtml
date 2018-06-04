@@ -25,6 +25,11 @@
         </ui:define>
 
         <ui:define name="content">
+            <div class="d-flex justify-content-start">
+                <h:form>
+                    <h:commandButton styleClass="submit" value="Назад" action="#{projectController.projectOverView()}"/>
+                </h:form>
+            </div>
             <div class="content-center form project-member">
                 <h:outputText value="Project: '#{projectController.project.title}'"/>
                 <br/>
@@ -54,41 +59,7 @@
 
                         <h:messages errorClass="errorMessage" infoClass="infoMessage"
                                     layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
-
-                        <ui:remove>
-                            <div id="users" >
-                                <!--h:selectOneMenu value="#{projectMemberController.userEmail}" required="true" id="year-of-birth"
-                                                 styleClass="form-control">
-                                    <f:selectItems value="#{userController.searchByEmailTop5(projectMemberController.userEmail)}"/>
-                                </h:selectOneMenu-->
-
-                            </div>
-                            <ul>
-                                <ui:repeat value="#{userController.searchByEmailTop5(projectMemberController.userEmail)}" var="possibleUsers">
-                                    <h:outputText value="searching for: '#{projectMemberController.userEmail}'"/>
-                                    <li><h:outputText value="#{possibleUsers.email}" >
-                                    </h:outputText> </li>
-                                </ui:repeat>
-                            </ul>
-                        </ui:remove>
-
-
-
                     </h:form>
-                    <script>
-                        var users = document.getElementById("users");
-                        //hideUsers();
-                        function showUsers(){
-                            console.log("showing users");
-                            users.style.visibility="visible";
-                        }
-
-                        function hideUsers() {
-                            console.log("hiding users");
-                            users.style.visibility = "hidden";
-                        }
-
-                    </script>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{projectController.project == null}">
                     <h3>Project doesn't exist.</h3>

@@ -1,8 +1,10 @@
 package kg.goent.models.questionnaire;
 
 import kg.goent.models.bmc.Segment;
+import kg.goent.models.project.Project;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,37 +15,40 @@ import java.util.List;
         @NamedQuery(name = "Question.findAll",
                 query = "SELECT q FROM Question q"),
         @NamedQuery(name = "Question.findBy",
-                query = "SELECT q FROM Question q")
+                query = "SELECT q FROM Question q"),
+        @NamedQuery(name = "Question.findByProject",
+                query = "SELECT q FROM Question q where q.project = :project" ),
+
+
 })
-public class Question {
+public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int questionId;
+    private Integer questionId;
 
     @Column
     private String question;
 
-    @OneToMany(mappedBy = "question")
-    private List<QuestionAnswer> questionAnswerList;
+    @OneToOne(mappedBy = "question")
+    private QuestionAttributeScale questionAttributeScale;
 
     @ManyToOne
     @JoinColumn(name = "questionTypeId")
     private QuestionType questionType;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "segmentId")
     private Segment segment;
 
-    @OneToMany(mappedBy = "question",fetch = FetchType.EAGER)
-    private List<QuestionProperty> questionPropertyList;
+    @Column
+    private Boolean expected;
 
-    public int getQuestionId() {
-        return questionId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "projectId")
+    private Project project;
 
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
+    @OneToMany(mappedBy = "question")
+    private List<QuestionAnswer> questionAnswerList;
 
     public String getQuestion() {
         return question;
@@ -51,14 +56,6 @@ public class Question {
 
     public void setQuestion(String question) {
         this.question = question;
-    }
-
-    public List<QuestionAnswer> getQuestionAnswerList() {
-        return questionAnswerList;
-    }
-
-    public void setQuestionAnswerList(List<QuestionAnswer> questionAnswerList) {
-        this.questionAnswerList = questionAnswerList;
     }
 
     public QuestionType getQuestionType() {
@@ -77,11 +74,35 @@ public class Question {
         this.segment = segment;
     }
 
-    public List<QuestionProperty> getQuestionPropertyList() {
-        return questionPropertyList;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestionPropertyList(List<QuestionProperty> questionPropertyList) {
-        this.questionPropertyList = questionPropertyList;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
+    }
+
+    public Boolean getExpected() {
+        return expected;
+    }
+
+    public void setExpected(Boolean expected) {
+        this.expected = expected;
+    }
+
+    public QuestionAttributeScale getQuestionAttributeScale() {
+        return questionAttributeScale;
+    }
+
+    public void setQuestionAttributeScale(QuestionAttributeScale questionAttributeScale) {
+        this.questionAttributeScale = questionAttributeScale;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

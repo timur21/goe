@@ -2,6 +2,7 @@ package kg.goent.models.project;
 
 import kg.goent.models.bmc.Bmc;
 import kg.goent.models.hypothesis.HypothesisContainer;
+import kg.goent.models.questionnaire.Question;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,6 +46,9 @@ public class Project implements Serializable{
 
     @OneToOne(mappedBy = "project")
     private HypothesisContainer hypothesisContainer;
+
+    @OneToMany(mappedBy = "project")
+    private List<Question> questionList;
 
     public HypothesisContainer getHypothesisContainer() {
         return hypothesisContainer;
@@ -108,6 +112,14 @@ public class Project implements Serializable{
 
     public void setBmc(Bmc bmc) {
         this.bmc = bmc;
+    }
+
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
     }
 
     public ProjectMember getTeamLeader(){

@@ -6,7 +6,7 @@ import kg.goent.models.questionnaire.QuestionType;
 import java.util.List;
 
 /**
- * Created by azire on 4/20/2017.
+ * Created by timur on 4/20/2017.
  */
 public class QuestionTypeFacade {
     private ObjectDao objectDao = new ObjectDao();
@@ -61,26 +61,12 @@ public class QuestionTypeFacade {
         return questionType;
     }
 
-//    public QuestionType findByStatus(String status){
-//        QuestionType ms;
-//        try {
-//            objectDao.beginTransaction();
-//            ms = objectDao.getEntityManager().createNamedQuery("MemberStatus.findByMemberStatus",QuestionType.class)
-//                    .setParameter("status",status).getSingleResult();
-//        }catch (Exception ex){
-//            ms = null;
-//        }finally {
-//            objectDao.commitAndCloseTransaction();
-//        }
-//        return ms;
-//    }
-
     private void initialize(){
-        QuestionType qt = new QuestionType("Multiple choice");
-        create(qt);
-        qt = new QuestionType("True/False");
+        QuestionType qt = new QuestionType("True/False");
         create(qt);
         qt = new QuestionType("Numerical");
+        create(qt);
+        qt = new QuestionType("Text");
         create(qt);
         
     }

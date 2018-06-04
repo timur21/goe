@@ -1,6 +1,7 @@
 package kg.goent.facade.questionnaire;
 
 import kg.goent.dao.ObjectDao;
+import kg.goent.models.questionnaire.Question;
 import kg.goent.models.questionnaire.QuestionAnswer;
 
 import java.util.List;
@@ -55,19 +56,17 @@ public class QuestionAnswerFacade {
         return questionAnswer;
     }
 
-//    public QuestionAnswer findByStatus(String status){
-//        QuestionAnswer ms;
-//        try {
-//            objectDao.beginTransaction();
-//            ms = objectDao.getEntityManager().createNamedQuery("MemberStatus.findByMemberStatus",QuestionAnswer.class)
-//                    .setParameter("status",status).getSingleResult();
-//        }catch (Exception ex){
-//            ms = null;
-//        }finally {
-//            objectDao.commitAndCloseTransaction();
-//        }
-//        return ms;
-//    }
-
-
+    public List<QuestionAnswer> findAnswersByQuestion(Question question){
+    List<QuestionAnswer> ms;
+    try {
+        objectDao.beginTransaction();
+        ms = objectDao.getEntityManager().createNamedQuery("QuestionAnswer.findByQuestion",QuestionAnswer.class)
+                .setParameter("question",question).getResultList();
+    }catch (Exception ex){
+        ms = null;
+    }finally {
+        objectDao.commitAndCloseTransaction();
+    }
+    return ms;
+    }
 }

@@ -1,6 +1,7 @@
 package kg.goent.facade.questionnaire;
 
 import kg.goent.dao.ObjectDao;
+import kg.goent.models.project.Project;
 import kg.goent.models.questionnaire.Question;
 
 import java.util.List;
@@ -53,6 +54,19 @@ public class QuestionFacade {
             objectDao.commitAndCloseTransaction();
         }
         return question;
+    }
+    public List<Question> findByProject(Project object){
+        List<Question> ms;
+        try {
+            objectDao.beginTransaction();
+            ms = objectDao.getEntityManager().createNamedQuery("Question.findByProject",Question.class)
+                    .setParameter("project",object).getResultList();
+        }catch (Exception ex){
+            ms = null;
+        }finally {
+            objectDao.commitAndCloseTransaction();
+        }
+        return ms;
     }
 
 //    public Question findByStatus(String status){

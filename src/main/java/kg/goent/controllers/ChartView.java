@@ -12,23 +12,19 @@ import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.CategoryAxis;
-import org.primefaces.model.chart.LineChartModel;
-import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.*;
 
 @ManagedBean
 public class ChartView implements Serializable {
 
-    private LineChartModel areaModel;
+    private CartesianChartModel areaModel;
 
     @PostConstruct
     public void init() {
         createAreaModel();
     }
 
-    public LineChartModel getAreaModel() {
+    public CartesianChartModel getAreaModel() {
         return areaModel;
     }
 
@@ -58,7 +54,7 @@ public class ChartView implements Serializable {
 
         areaModel.setTitle("Chart");
         areaModel.setLegendPosition("ne");
-        areaModel.setStacked(true);
+//        areaModel.setStacked(true);
         areaModel.setShowPointLabels(true);
 
         Axis xAxis = new CategoryAxis("Типы вопросов");

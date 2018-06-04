@@ -1,6 +1,7 @@
 package kg.goent.controllers;
 
-        import kg.goent.facade.bmc.SegmentContainerFacade;
+import kg.goent.facade.MemberRoleFacade;
+import kg.goent.facade.bmc.SegmentContainerFacade;
         import kg.goent.facade.hypothesis.HypothesisContainerFacade;
         import kg.goent.facade.hypothesis.HypothesisFacade;
         import kg.goent.facade.project.ProjectFacade;
@@ -8,7 +9,8 @@ package kg.goent.controllers;
         import kg.goent.models.bmc.SegmentContainer;
         import kg.goent.models.hypothesis.Hypothesis;
         import kg.goent.models.hypothesis.HypothesisContainer;
-        import kg.goent.models.project.Project;
+import kg.goent.models.project.MemberRole;
+import kg.goent.models.project.Project;
         import kg.goent.tools.Tools;
 
         import javax.faces.bean.ManagedBean;
@@ -35,7 +37,5 @@ public class QuestionnaireController extends GetReqBean {
         String redirect = QUESTIONNAIRE_OVERVIEW + REDIRECT + "projectId=" + projectId;
         return redirect;
     }
-
-
 
 }

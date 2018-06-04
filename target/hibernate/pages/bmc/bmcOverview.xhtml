@@ -271,8 +271,7 @@
                                         <h:commandButton styleClass="submit" value="Добавить" >
                                             <f:ajax listener="#{segmentContainerController.addSegmentAjax(8)}"
                                                     execute="@form"
-                                                    render="@form"
-                                            />
+                                                    render="@form" />
                                         </h:commandButton>
 
                                         <h:outputText style="font-family: Calibri" value="Структура доходов"/>
@@ -294,7 +293,6 @@
                                         <h:commandButton styleClass="submit" value="#{field.add}" action="#{segmentContainerController.createSegmentContainer}"/>
                                     </div>
                                 </h:form>
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

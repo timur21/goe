@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <ui:composition template="/template/mainTemplate.xhtml">
+        <ui:param name="pageTitle" value="Questionnaire Overview"/>
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+                <f:viewParam name="projectId" value="#{projectMemberController.projectId}"/>
+                <f:viewParam name="projectId" value="#{questionController.projectId}"/>
+            </f:metadata>
+        </ui:define>
+        <ui:define name="content-left"><div class="content-left"></div></ui:define>
+        <ui:define name="content">
+            <div class="d-flex justify-content-between">
+                <h:link styleClass="submit" value="Назад" outcome="/pages/questionnaire/QuestionnaireOverview">
+                    <f:param name="projectId" value="#{projectController.projectId}"/>
+                </h:link>
+            </div>
+            <div class="content-center">
+                <div class="d-flex  flex-column ">
+                    <div class="d-flex">
+                        <div class="panel panel-primary flex-1 m-5">
+                            <div class="panel-heading">
+                                <div class="text-center">Опросник</div>
+                            </div>
+                            <div class="panel-body">
+                                <p:messages id="messages-survey" showDetail="true" closable="true" />
+                                <h:form>
+                                    <ui:repeat value="#{questionController.questionList}" var="question">
+                                        <h2><h:outputText styleClass="label label-info" value="#{question.question}"/></h2>
+
+                                        <h:panelGroup id="question-attrs">
+                                            <!-- Yes/no -->
+                                            <h:panelGroup id="yes-no" rendered="#{question.questionType.questionTypeId == 1}">
+                                                <br/>
+                                                <h:outputText value="Ответ твет"/>
+
+                                                <h:selectOneRadio value="#{questionController.getQuestionAnswerForQuestion(question).answer_bool}" required="true">
+                                                    <f:selectItem itemLabel="Yes" itemValue="true"/>
+                                                    <f:selectItem itemLabel="No" itemValue="false"/>
+                                                    <f:ajax render="@form"/>
+                                                </h:selectOneRadio>
+                                            </h:panelGroup>
+
+                                            <!-- numerical -->
+                                            <h:panelGrid columns="2" id="numerical" rendered="#{question.questionType.questionTypeId == 2}">
+
+                                                <h:outputText value="Ответ"/>
+                                                <h:inputText styleClass="form-control"
+                                                             value="#{ questionController.getQuestionAnswerForQuestion(question).answer_scale }" required="true">
+                                                    <f:ajax execute="@this"/>
+                                                </h:inputText>
+                                            </h:panelGrid>
+
+                                            <!-- text -->
+                                            <h:panelGrid columns="1" id="text" rendered="#{question.questionType.questionTypeId == 3}">
+                                                <h:outputText value="Ответ"/>
+                                                <h:inputText styleClass="form-control"
+                                                             value="#{ questionController.getQuestionAnswerForQuestion(question).answer_text }" required="true">
+                                                    <f:ajax execute="@this"/>
+                                                </h:inputText>
+                                            </h:panelGrid>
+
+                                        </h:panelGroup>
+                                        <hr/>
+                                    </ui:repeat>
+                                    <h:commandButton styleClass="submit" value="Сохранить">
+                                        <f:ajax listener="#{ questionController.saveAnswers() }"
+                                                execute="@form"
+                                                render="messages-survey @form"/>
+                                    </h:commandButton>
+                                </h:form>
+                            </div> <!-- .panel-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <h:form>
+                    <button type="button" onclick="HTMLtoPDF" class="submit">Экспорт в PDF</button>
+                </h:form>
+                <h:form>
+                    <h:commandButton styleClass="submit" value="Сохранить"/>
+                </h:form>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</f:view>
+</html>

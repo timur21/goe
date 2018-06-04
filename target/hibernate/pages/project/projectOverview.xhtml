@@ -24,6 +24,8 @@
                 <f:viewParam name="projectId" value="#{projectMemberController.projectId}"/>
 
                 <f:viewParam name="projectId" value="#{hypothesisContainerController.projectId}"/>
+
+                <f:viewParam name="projectId" value="#{questionnaireController.projectId}"/>
             </f:metadata>
         </ui:define>
         <ui:define name="content">
@@ -61,12 +63,13 @@
                             </h:panelGroup>
                             <h:panelGroup>
                                 <h:panelGroup>
-                                    <h:commandLink action="#{analysisController.analysisOverview()}">
+                                    <h:link outcome="/pages/analysis/analysisOverview">
                                         <div class="menu4">
                                             <p>Результаты Исследования</p>
                                             <h:graphicImage library="main" name="images/4.png"/>
                                         </div>
-                                    </h:commandLink>
+                                        <f:param name="projectId" value="#{projectController.projectId}"/>
+                                    </h:link>
                                 </h:panelGroup>
                             </h:panelGroup>
                         </h:form>

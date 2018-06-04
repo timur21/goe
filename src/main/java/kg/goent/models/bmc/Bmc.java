@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by azire on 5/2/2017.
+ * Created by timur on 5/2/2017.
  */
 @Entity
 @NamedQueries({@NamedQuery(name = "Bmc.findByProject",

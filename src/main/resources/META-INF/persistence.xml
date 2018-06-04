@@ -18,6 +18,10 @@
         <class>kg.goent.models.project.Project</class>
         <class>kg.goent.models.project.ProjectMember</class>
         <class>kg.goent.models.project.ProjectStatus</class>
+        <class>kg.goent.models.questionnaire.Question</class>
+        <class>kg.goent.models.questionnaire.QuestionType</class>
+        <class>kg.goent.models.questionnaire.QuestionAnswer</class>
+        <class>kg.goent.models.questionnaire.QuestionAttributeScale</class>
         <class>kg.goent.models.User</class>
         <class>kg.goent.models.UserRole</class>
         <class>kg.goent.models.UserStatus</class>

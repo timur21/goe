@@ -6,6 +6,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
 form,fieldset,input,textarea,p,blockquote,th,td {
     padding: 0;
     margin: 0;
+    font-family: Calibri;
 }
 .body-content{
     margin-top: 5%;
@@ -20,8 +21,17 @@ form,fieldset,input,textarea,p,blockquote,th,td {
     border-collapse:collapse;
     background-color: white;
     padding: 10px;
+    width: fit-content;
+}
+.q-table{
+    margin-right: 20px;
+    margin-left: 20px;
 
 }
+.panel-heading{
+    border-color: #0D84B9;
+}
+
 .order-table tr:nth-child(even){
 
 }
@@ -101,6 +111,9 @@ form,fieldset,input,textarea,p,blockquote,th,td {
 }
 
 .hyp-table{
+    width: fit-content;
+}
+.question-table{
     width: fit-content;
 }
 .question-form{
@@ -371,6 +384,7 @@ body{
 	background-color: white;
 	height: 100%;
     border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .menu{
   position: absolute;

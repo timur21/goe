@@ -1,12 +1,13 @@
 package kg.goent.models.bmc;
 
 import kg.goent.models.hypothesis.Hypothesis;
+import kg.goent.models.questionnaire.Question;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by azire on 5/2/2017.
+ * Created by timur on 5/2/2017.
  */
 @Entity
 @NamedQueries({
@@ -32,6 +33,9 @@ public class Segment implements Serializable {
 
     @OneToOne(mappedBy = "segment")
     private Hypothesis hypothesis;
+
+    @OneToOne(mappedBy = "segment")
+    private Question question;
 
     public int getSegmentId() {
         return segmentId;
@@ -63,5 +67,21 @@ public class Segment implements Serializable {
 
     public void setSegmentContainer(SegmentContainer segmentContainer) {
         this.segmentContainer = segmentContainer;
+    }
+
+    public Hypothesis getHypothesis() {
+        return hypothesis;
+    }
+
+    public void setHypothesis(Hypothesis hypothesis) {
+        this.hypothesis = hypothesis;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }
