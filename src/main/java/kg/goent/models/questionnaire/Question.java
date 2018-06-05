@@ -29,7 +29,7 @@ public class Question implements Serializable {
     @Column
     private String question;
 
-    @OneToOne(mappedBy = "question")
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
     private QuestionAttributeScale questionAttributeScale;
 
     @ManyToOne
@@ -49,6 +49,14 @@ public class Question implements Serializable {
 
     @OneToMany(mappedBy = "question")
     private List<QuestionAnswer> questionAnswerList;
+
+    public List<QuestionAnswer> getQuestionAnswerList() {
+        return questionAnswerList;
+    }
+
+    public void setQuestionAnswerList(List<QuestionAnswer> questionAnswerList) {
+        this.questionAnswerList = questionAnswerList;
+    }
 
     public String getQuestion() {
         return question;

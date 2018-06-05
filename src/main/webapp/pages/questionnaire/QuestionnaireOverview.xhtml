@@ -113,7 +113,11 @@
                                                         </h:panelGrid>
 
                                                     </h:panelGroup>
-                                                    <h:commandButton styleClass="submit" value="Сохранить" action="#{questionController.createQuestion(hypothesis.segment)}"/>
+                                                    <h:commandButton styleClass="submit" value="Сохранить" >
+                                                        <f:ajax listener="#{questionController.createQuestion(hypothesis.segment)}"
+                                                                execute="@form"
+                                                                render="@form"/>
+                                                    </h:commandButton>
                                                 </h:panelGroup>
                                                 <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
                                                                  rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"
@@ -287,7 +291,12 @@
                                                         </h:panelGrid>
 
                                                     </h:panelGroup>
-                                                    <h:commandButton styleClass="submit" value="Сохранить" action="#{questionController.createQuestion(hypothesis.segment)}"/>
+
+                                                    <h:commandButton styleClass="submit" value="Сохранить" >
+                                                        <f:ajax listener="#{questionController.createQuestion(hypothesis.segment)}"
+                                                                execute="@form"
+                                                                render="@form"/>
+                                                    </h:commandButton>
                                                 </h:panelGroup>
                                                 <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
                                                                  rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"
@@ -373,7 +382,11 @@
                                                                      rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 3}"/>
 
                                                     </h:panelGroup>
-                                                    <h:commandButton styleClass="submit" value="Сохранить" action="#{questionController.createQuestion(hypothesis.segment)}"/>
+                                                    <h:commandButton styleClass="submit" value="Сохранить" >
+                                                        <f:ajax listener="#{questionController.createQuestion(hypothesis.segment)}"
+                                                                execute="@form"
+                                                                render="@form"/>
+                                                    </h:commandButton>
                                                 </h:panelGroup>
                                                 <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
                                                                  rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"

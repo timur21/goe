@@ -114,9 +114,9 @@ public class QuestionController extends GetReqBean{
     public void createQuestion(Segment segment){
         Question question = getQuestionForSegment(segment);
         if(question.getQuestionId() == null || question.getQuestionId() == 0)
-            questionFacade.create(question);
+            new QuestionFacade().create(question);
         else
-            questionFacade.update(question);
+            new QuestionFacade().update(question);
         if(question.getQuestionType().getQuestionTypeId() == 2){
             QuestionAttributeScale qas = question.getQuestionAttributeScale();
             if(qas.getId() == null || qas.getId() == 0)

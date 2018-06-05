@@ -79,58 +79,6 @@
                     </h:panelGroup>
                 </div>
 
-
-
-                <!--<h:panelGroup rendered="#{projectController.hasAccess()}">-->
-                    <!--<h:panelGroup styleClass="project-stage-container">-->
-                        <!--<h:panelGroup >-->
-                            <!--<div class="project-stage">-->
-                                <!--<h:outputText value="#{field.finished}"-->
-                                              <!--rendered="#{projectController.project.bmc.bmcStatus.bmcStatusId == 1}"/>-->
-                                <!--<h:outputText value="#{field.underConstruction}"-->
-                                              <!--rendered="#{projectController.project.bmc.bmcStatus.bmcStatusId == 2}"/>-->
-                            <!--</div>-->
-                        <!--</h:panelGroup>-->
-                        <!--<h:form>-->
-                            <!--<h:panelGroup rendered="#{projectController.project.bmc == null or projectController.project.bmc.bmcStatus.bmcStatusId == 2}">-->
-                                <!--<h:panelGroup rendered='#{not projectController.hasBmc()}'>-->
-                                    <!--<h:commandLink value="#{field.createBmc}" action="#{bmcController.bmcOverview(projectController.project)}"/>-->
-                                <!--</h:panelGroup>-->
-
-                            <!--</h:panelGroup>-->
-                            <!--<h:panelGroup rendered="#{projectController.project.bmc.bmcStatus.bmcStatusId == 1}">-->
-                                <!--<h:commandLink value="#{field.viewBmc}" action="#{bmcController.bmcOverview(projectController.project)}"/>-->
-                            <!--</h:panelGroup>-->
-                        <!--</h:form>-->
-                    <!--</h:panelGroup>-->
-
-                    <!--<h:panelGroup styleClass="project-stage-container">-->
-                        <!--<h:panelGroup >-->
-                            <!--<div class="project-stage">-->
-                                <!--world-->
-                            <!--</div>-->
-
-                        <!--</h:panelGroup>-->
-                        <!--<h:panelGroup rendered="#{0==0}">-->
-                            <!--<h:panelGroup rendered="#{projectController.project.bmc == null or projectController.project.bmc.bmcStatus.bmcStatusId == 2}">-->
-                                <!--<h:outputText value="Гипотезы"/>-->
-                            <!--</h:panelGroup>-->
-                            <!--<h:panelGroup rendered="#{projectController.project.bmc.bmcStatus.bmcStatusId == 1}">-->
-                                <!--<h:form>-->
-                                    <!--<h:panelGroup rendered="#{projectController.project.hypothesisContainer == null}">-->
-                                        <!--<h:commandLink value="Создать Список Гипотез" action="#{hypothesisContainerController.viewHypothesisOverView()}"/>-->
-                                    <!--</h:panelGroup>-->
-                                    <!--<h:panelGroup rendered="#{projectController.project.hypothesisContainer != null}">-->
-                                        <!--<h:commandLink value="Посмотреть Список Гипотез" action="#{hypothesisContainerController.viewHypothesisOverView()}"/>-->
-                                    <!--</h:panelGroup>-->
-                                <!--</h:form>-->
-                            <!--</h:panelGroup>-->
-                        <!--</h:panelGroup>-->
-                    <!--</h:panelGroup>-->
-                <!--</h:panelGroup>-->
-                <!--<h:panelGroup rendered="#{not projectController.hasAccess()}">-->
-                    <!--<h3>You don't have permission</h3>-->
-                <!--</h:panelGroup>-->
             </div>
         </ui:define>
     </ui:composition>
