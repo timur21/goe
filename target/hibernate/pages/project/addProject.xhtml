@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+    <h:body>
+        <ui:composition template="/template/mainTemplate.xhtml">
+            <ui:param name="pageTitle" value="New project"/>
+            <ui:define name="sidebar-left"/>
+            <ui:define name="content">
+                <div class="content-center form">
+                    <div class="project-panel">
+                        <h:form>
+                            <h2 style="color:#00A5DE; margin:0px 25px 25px 25px; text-align: center; font-family:Calibri;">Создание проекта</h2>
+                            <h:panelGrid columns="2">
+
+                                <h:outputText value="Название проекта"/>
+                                <h:panelGroup>
+                                    <h:inputText value="#{projectController.project.title}">
+
+                                    </h:inputText>
+                                </h:panelGroup>
+
+                                <h:outputText value="Описание"/>
+                                <h:inputTextarea styleClass="text-area" value="#{projectController.project.description}"/>
+
+                                <h:outputText rendered="false"/>
+                                <h:commandButton value="Создать проект" styleClass="submit" action="#{projectController.createProject}"/>
+                                <h:messages errorClass="errorMessage" infoClass="infoMessage"
+                                            layout="table" globalOnly="true" showDetail="false" showSummary="true"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

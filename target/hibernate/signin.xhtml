@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+    <ui:composition template="/template/authTemplate.xhtml">
+        <ui:param name="pageTitle" value="Sign in"/>
+        <ui:define name="content">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <h:form styleClass="">
+
+                        <h:panelGroup styleClass="login100-form-title p-b-26">
+                            Вход
+                        </h:panelGroup>
+
+                        <div class="wrap-input100 validate-input">
+                            <h:inputText styleClass="input100" color="white" name="email" value="#{userController.user.email}"/>
+                            <span class="focus-input100" data-placeholder="Почтовый адрес"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="btn-show-pass">
+                                <i class="zmdi zmdi-eye"></i>
+                            </span>
+                            <h:inputSecret styleClass="input100" color="white" name="password" value="#{userController.user.password}">
+                                <f:validateLength minimum="3"/>
+                            </h:inputSecret>
+                            <span class="focus-input100" data-placeholder="Пароль"></span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <h:commandButton class="login100-form-btn cmd-btn" value="Войти" action="#{userController.signIn}"/>
+                            </div>
+                        </div>
+                        <div class="text-center p-t-115">
+                            <h:panelGroup styleClass="txt1">
+                                Нет аккаунта?
+                            </h:panelGroup>
+                            <h:link class="txt2" value="Регистрируйся" outcome="signup"/>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+
+
+</h:body>
+</html>

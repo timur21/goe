@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://java.sun.com/jsf/core">
+<f:view>
+    <ui:composition template="/template/mainTemplate.xhtml">
+        <ui:param name="pageTitle" value="Questionnaire Overview"/>
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+                <f:viewParam name="projectId" value="#{projectMemberController.projectId}"/>
+                <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+                <f:viewParam name="bmcId" value="#{bmcController.bmcId}"/>
+
+                <f:viewParam name="bmcId" value="#{segmentContainerController.bmcId}"/>
+                <f:viewParam name="segmentContainer" value="#{segmentContainerController.segmentContainerId}"/>
+                <f:viewParam name="projectId" value="#{segmentContainerController.projectId}"/>
+
+                <f:viewParam name="bmcId" value="#{editSegmentContainerController.bmcId}"/>
+                <f:viewParam name="segmentContainer" value="#{editSegmentContainerController.segmentContainerId}"/>
+                <f:viewParam name="projectId" value="#{editSegmentContainerController.projectId}"/>
+
+                <f:viewParam name="projectId" value="#{hypothesisContainerController.projectId}"/>
+
+                <f:viewParam name="projectId" value="#{questionController.projectId}"/>
+
+            </f:metadata>
+        </ui:define>
+        <ui:define name="content-left"><div class="content-left"></div></ui:define>
+        <ui:define name="content">
+            <div class="d-flex justify-content-between">
+                <h:form>
+                    <h:commandButton styleClass="submit" value="Назад" action="#{projectController.projectOverView()}"/>
+                </h:form>
+
+                <h:link styleClass="submit" value="Опросник" outcome="survey" >
+                    <f:param name="projectId" value="#{projectController.projectId}"/>
+                </h:link>
+            </div>
+            <div class="content-center">
+                <div class="d-flex  flex-row` ">
+                    <div class="d-flex flex-1">
+                        <div class="panel panel-primary flex-1 m-5">
+                            <div class="panel-heading">
+                                <div class="text-center">Потребительский сегмент</div>
+                            </div>
+                            <div class="panel-body">
+                                <h:panelGroup id="customer-segment">
+                                    <h:form>
+                                        <h:dataTable value="#{hypothesisContainerController.hypothesisContainer.csHypList}" var="hypothesis" >
+                                            <h:column>#{hypothesis.segment.segmentId}: #{hypothesis.segment.segmentTitle}</h:column>
+                                            <h:column >
+                                                <h:panelGroup rendered="#{ questionController.hasQuestion(hypothesis.segment) }">
+                                                    <div class="input-group">
+                                                        <h:inputText class="form-control" value="#{ questionController.getQuestionForSegment(hypothesis.segment).question }">
+                                                            <f:ajax execute="@this" render="@this"/>
+                                                        </h:inputText>
+                                                    </div>
+
+                                                    <!-- Question Type -->
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText style="font-family: Calibri" value="Тип вопроса"/>
+                                                        <h:selectOneMenu style="border-radius: 5px;"
+                                                                        value="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId}">
+                                                            <f:selectItem itemValue="0" itemLabel="Выберите тип вопроса" />
+                                                            <f:selectItems value="#{questionController.getQuestionTypeList()}" var="type" itemValue="#{type.questionTypeId}" itemLabel="#{type.questionType}"/>
+                                                            <f:ajax render="question-attrs-cs"/>
+                                                        </h:selectOneMenu>
+                                                    </h:panelGrid>
+                                                    <h:panelGroup id="question-attrs-cs">
+
+                                                        <!-- Yes/no -->
+                                                        <h:panelGroup id="yes-no-cs" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 1}">
+                                                            <br/>
+                                                            <h:outputText value="Ожидаемый ответ"/>
+
+                                                            <h:selectOneRadio value="#{questionController.getQuestionForSegment(hypothesis.segment).expected}">
+                                                                <f:selectItem itemLabel="Yes" itemValue="true"/>
+                                                                <f:selectItem itemLabel="No" itemValue="false"/>
+                                                                <f:ajax render="@form"/>
+                                                            </h:selectOneRadio>
+                                                        </h:panelGroup>
+
+                                                         <!-- numerical -->
+                                                        <h:panelGrid columns="2" id="numerical-cs" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 2}">
+
+                                                            <h:outputText value="От"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_start }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="До"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_end }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="Ожидаемый ответ"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.expected }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                        </h:panelGrid>
+
+                                                        <!-- text -->
+                                                        <h:panelGrid columns="1" id="text-cs" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 3}">
+                                                        </h:panelGrid>
+
+                                                    </h:panelGroup>
+                                                    <h:commandButton styleClass="submit" value="Сохранить" >
+                                                        <f:ajax listener="#{questionController.createQuestion(hypothesis.segment)}"
+                                                                execute="@form"
+                                                                render="@form"/>
+                                                    </h:commandButton>
+                                                </h:panelGroup>
+                                                <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
+                                                                 rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"
+                                                                 styleClass="btn btn-primary" value="+ #{hypothesis.segment.segmentId}">
+                                                        <f:ajax render=":customer-segment"
+                                                                listener="#{ questionController.createQuestionForSegment(hypothesis.segment) }"/>
+                                                </h:commandButton>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-1">
+                        <div class="panel panel-primary flex-1 m-5">
+                            <div class="panel-heading">
+                                <div class="text-center">Ценностное предложение</div>
+                            </div>
+                            <div class="panel-body">
+                                <h:panelGroup id="value-proposition">
+                                    <h:form>
+                                        <h:dataTable value="#{hypothesisContainerController.hypothesisContainer.vpHypList}" var="hypothesis" >
+                                            <h:column>#{hypothesis.segment.segmentId}: #{hypothesis.segment.segmentTitle}</h:column>
+                                            <h:column >
+                                                <h:panelGroup rendered="#{ questionController.hasQuestion(hypothesis.segment) }">
+                                                    <div class="input-group">
+                                                        <h:inputText id="tempin" class="form-control" value="#{ questionController.getQuestionForSegment(hypothesis.segment).question }">
+                                                            <f:ajax execute="@this" render="@this"/>
+                                                        </h:inputText>
+                                                    </div>
+
+                                                    <!-- Question Type -->
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText style="font-family: Calibri" value="Тип вопроса"/>
+                                                        <h:selectOneMenu style="border-radius: 5px;"
+                                                                         value="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId}">
+                                                            <f:selectItem itemValue="0" itemLabel="Выберите тип вопроса" />
+                                                            <f:selectItems value="#{questionController.getQuestionTypeList()}" var="type" itemValue="#{type.questionTypeId}" itemLabel="#{type.questionType}"/>
+                                                            <f:ajax render="question-attrs-vp"/>
+                                                        </h:selectOneMenu>
+                                                    </h:panelGrid>
+                                                    <h:panelGroup id="question-attrs-vp">
+
+                                                        <!-- Yes/no -->
+                                                        <h:panelGroup id="yes-no-vp" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 1}">
+                                                            <br/>
+                                                            <h:outputText value="Ожидаемый ответ"/>
+
+                                                            <h:selectOneRadio value="#{questionController.getQuestionForSegment(hypothesis.segment).expected}">
+                                                                <f:selectItem itemLabel="Yes" itemValue="true"/>
+                                                                <f:selectItem itemLabel="No" itemValue="false"/>
+                                                                <f:ajax render="@form"/>
+                                                            </h:selectOneRadio>
+                                                        </h:panelGroup>
+
+                                                        <!-- numerical -->
+                                                        <h:panelGrid columns="2" id="numerical-vp" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 2}">
+
+                                                            <h:outputText value="От"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_start }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="До"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_end }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="Ожидаемый ответ"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.expected }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                        </h:panelGrid>
+
+                                                        <!-- text -->
+                                                        <h:panelGrid columns="1" id="text-vp"
+                                                                     rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 3}"/>
+
+                                                    </h:panelGroup>
+                                                    <h:commandButton styleClass="submit" value="Сохранить" action="#{questionController.createQuestion(hypothesis.segment)}"/>
+                                                </h:panelGroup>
+                                                <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
+                                                                 rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"
+                                                                 styleClass="btn btn-primary" value="+ #{hypothesis.segment.segmentId}">
+                                                    <f:ajax render="value-proposition"
+                                                            listener="#{ questionController.createQuestionForSegment(hypothesis.segment) }"/>
+                                                </h:commandButton>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex  flex-row ">
+                    <div class="d-flex flex-1">
+                        <div class="panel panel-primary flex-1 m-5">
+                            <div class="panel-heading">
+                                <div class="text-center">Каналы</div>
+                            </div>
+                            <div class="panel-body">
+                                <h:panelGroup id="distribution-channel">
+                                    <h:form>
+                                        <h:dataTable value="#{hypothesisContainerController.hypothesisContainer.dcHypList}" var="hypothesis" >
+                                            <h:column>#{hypothesis.segment.segmentId}: #{hypothesis.segment.segmentTitle}</h:column>
+                                            <h:column >
+                                                <h:panelGroup rendered="#{ questionController.hasQuestion(hypothesis.segment) }">
+                                                    <div class="input-group">
+                                                        <h:inputText class="form-control" value="#{ questionController.getQuestionForSegment(hypothesis.segment).question }">
+                                                            <f:ajax execute="@this" render="@this"/>
+                                                        </h:inputText>
+                                                    </div>
+
+                                                    <!-- Question Type -->
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText style="font-family: Calibri" value="Тип вопроса"/>
+                                                        <h:selectOneMenu style="border-radius: 5px;"
+                                                                         value="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId}">
+                                                            <f:selectItem itemValue="0" itemLabel="Выберите тип вопроса" />
+                                                            <f:selectItems value="#{questionController.getQuestionTypeList()}" var="type" itemValue="#{type.questionTypeId}" itemLabel="#{type.questionType}"/>
+                                                            <f:ajax render="question-attrs-dc"/>
+                                                        </h:selectOneMenu>
+                                                    </h:panelGrid>
+                                                    <h:panelGroup id="question-attrs-dc">
+
+                                                        <!-- Yes/no -->
+                                                        <h:panelGroup id="yes-no-dc" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 1}">
+                                                            <br/>
+                                                            <h:outputText value="Ожидаемый ответ"/>
+
+                                                            <h:selectOneRadio value="#{questionController.getQuestionForSegment(hypothesis.segment).expected}">
+                                                                <f:selectItem itemLabel="Yes" itemValue="true"/>
+                                                                <f:selectItem itemLabel="No" itemValue="false"/>
+                                                                <f:ajax render="@form"/>
+                                                            </h:selectOneRadio>
+                                                        </h:panelGroup>
+
+                                                        <!-- numerical -->
+                                                        <h:panelGrid columns="2" id="numerical-dc" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 2}">
+
+                                                            <h:outputText value="От"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_start }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="До"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_end }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="Ожидаемый ответ"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.expected }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                        </h:panelGrid>
+
+                                                        <!-- text -->
+                                                        <h:panelGrid columns="1" id="text-dc" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 3}">
+                                                        </h:panelGrid>
+
+                                                    </h:panelGroup>
+
+                                                    <h:commandButton styleClass="submit" value="Сохранить" >
+                                                        <f:ajax listener="#{questionController.createQuestion(hypothesis.segment)}"
+                                                                execute="@form"
+                                                                render="@form"/>
+                                                    </h:commandButton>
+                                                </h:panelGroup>
+                                                <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
+                                                                 rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"
+                                                                 styleClass="btn btn-primary" value="+ #{hypothesis.segment.segmentId}">
+                                                    <f:ajax render="distribution-channel"
+                                                            listener="#{ questionController.createQuestionForSegment(hypothesis.segment) }"/>
+                                                </h:commandButton>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex  flex-1">
+                        <div class="panel panel-primary flex-1 m-5">
+                            <div class="panel-heading">
+                                <div class="text-center">Взаимоотношения с клиентом</div>
+                            </div>
+                            <div class="panel-body">
+                                <h:panelGroup id="customer-relationship">
+                                    <h:form>
+                                        <h:dataTable value="#{hypothesisContainerController.hypothesisContainer.crHypList}" var="hypothesis" >
+                                            <h:column>#{hypothesis.segment.segmentId}: #{hypothesis.segment.segmentTitle}</h:column>
+                                            <h:column >
+                                                <h:panelGroup rendered="#{ questionController.hasQuestion(hypothesis.segment) }">
+                                                    <div class="input-group">
+                                                        <h:inputText class="form-control" value="#{ questionController.getQuestionForSegment(hypothesis.segment).question }">
+                                                            <f:ajax execute="@this" render="@this"/>
+                                                        </h:inputText>
+                                                    </div>
+
+                                                    <!-- Question Type -->
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText style="font-family: Calibri" value="Тип вопроса"/>
+                                                        <h:selectOneMenu style="border-radius: 5px;"
+                                                                         value="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId}">
+                                                            <f:selectItem itemValue="0" itemLabel="Выберите тип вопроса" />
+                                                            <f:selectItems value="#{questionController.getQuestionTypeList()}" var="type" itemValue="#{type.questionTypeId}" itemLabel="#{type.questionType}"/>
+                                                            <f:ajax render="question-attrs-cr"/>
+                                                        </h:selectOneMenu>
+                                                    </h:panelGrid>
+                                                    <h:panelGroup id="question-attrs-cr">
+
+                                                        <!-- Yes/no -->
+                                                        <h:panelGroup id="yes-no-cr" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 1}">
+                                                            <br/>
+                                                            <h:outputText value="Ожидаемый ответ"/>
+
+                                                            <h:selectOneRadio value="#{questionController.getQuestionForSegment(hypothesis.segment).expected}">
+                                                                <f:selectItem itemLabel="Yes" itemValue="true"/>
+                                                                <f:selectItem itemLabel="No" itemValue="false"/>
+                                                                <f:ajax render="@form"/>
+                                                            </h:selectOneRadio>
+                                                        </h:panelGroup>
+
+                                                        <!-- numerical -->
+                                                        <h:panelGrid columns="2" id="numerical-cr" rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 2}">
+
+                                                            <h:outputText value="От"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_start }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="До"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.sc_end }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                            <h:outputText value="Ожидаемый ответ"/>
+                                                            <h:inputText styleClass="form-control"
+                                                                         value="#{ questionController.getQuestionForSegment(hypothesis.segment).questionAttributeScale.expected }">
+                                                                <f:ajax execute="@this"/>
+                                                            </h:inputText>
+
+                                                        </h:panelGrid>
+
+                                                        <!-- text -->
+                                                        <h:panelGrid columns="1" id="text-cr"
+                                                                     rendered="#{questionController.getQuestionForSegment(hypothesis.segment).questionType.questionTypeId == 3}"/>
+
+                                                    </h:panelGroup>
+                                                    <h:commandButton styleClass="submit" value="Сохранить" >
+                                                        <f:ajax listener="#{questionController.createQuestion(hypothesis.segment)}"
+                                                                execute="@form"
+                                                                render="@form"/>
+                                                    </h:commandButton>
+                                                </h:panelGroup>
+                                                <h:commandButton id="create-question-#{hypothesis.segment.segmentId}"
+                                                                 rendered="#{ !questionController.hasQuestion(hypothesis.segment) }"
+                                                                 styleClass="btn btn-primary" value="+ #{hypothesis.segment.segmentId}">
+                                                    <f:ajax render="customer-relationship"
+                                                            listener="#{ questionController.createQuestionForSegment(hypothesis.segment) }"/>
+                                                </h:commandButton>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <h:form>
+                    <button type="button" onclick="HTMLtoPDF" class="submit">Экспорт в PDF</button>
+                </h:form>
+                <h:form>
+                    <h:commandButton styleClass="submit" value="Сохранить"/>
+                </h:form>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</f:view>
+</html>

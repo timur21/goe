@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="hibernate" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>kg.goent.models.bmc.Bmc</class>
+        <class>kg.goent.models.bmc.BmcStatus</class>
+        <class>kg.goent.models.bmc.Segment</class>
+        <class>kg.goent.models.bmc.SegmentContainer</class>
+        <class>kg.goent.models.bmc.SegmentType</class>
+        <class>kg.goent.models.hypothesis.Hypothesis</class>
+        <class>kg.goent.models.hypothesis.HypothesisContainer</class>
+        <class>kg.goent.models.project.MemberRole</class>
+        <class>kg.goent.models.project.MemberStatus</class>
+        <class>kg.goent.models.project.Project</class>
+        <class>kg.goent.models.project.ProjectMember</class>
+        <class>kg.goent.models.project.ProjectStatus</class>
+        <class>kg.goent.models.questionnaire.Question</class>
+        <class>kg.goent.models.questionnaire.QuestionType</class>
+        <class>kg.goent.models.questionnaire.QuestionAnswer</class>
+        <class>kg.goent.models.questionnaire.QuestionAttributeScale</class>
+        <class>kg.goent.models.User</class>
+        <class>kg.goent.models.UserRole</class>
+        <class>kg.goent.models.UserStatus</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/goent" />
+            <property name="javax.persistence.jdbc.user" value="goent" />
+            <property name="javax.persistence.jdbc.password" value="goent" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.connection.shutdown" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

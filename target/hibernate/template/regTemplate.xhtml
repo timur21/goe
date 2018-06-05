@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:insert name="head">
+    <h:head>
+        <title>#{pageTitle}</title>
+        <h:outputStylesheet library="auth" name="css/style.css"/>
+        <h:outputStylesheet library="auth" name="vendor/bootstrap/css/bootstrap.css"/>
+        <!--<h:outputStylesheet library="auth" name="fonts/iconic/css/material-design-iconic-font.min.css"/>-->
+        <!--<h:outputStylesheet library="auth" name="fonts/font-awesome-4.7.0/css/font-awesome.css"/>-->
+        <h:outputStylesheet library="auth" name="vendor/animate/animate.css"/>
+        <h:outputStylesheet library="auth" name="vendor/css-hamburgers/hamburgers.min.css"/>
+        <h:outputStylesheet library="auth" name="vendor/animsition/css/animsition.min.css"/>
+        <h:outputStylesheet library="auth" name="vendor/select2/select2.min.css"/>
+        <h:outputStylesheet library="auth" name="vendor/daterangepicker/daterangepicker.css"/>
+        <h:outputStylesheet library="auth" name="css/util.css"/>
+        <h:outputStylesheet library="auth" name="css/main.css"/>
+
+    </h:head>
+</ui:insert>
+
+<h:body>
+    <ui:insert name="general">
+        <div class="limiter">
+            <div class="video-container" id="video-bg">
+                <div class="filter"></div>
+                <video id="bgvid" playsinline="" autoplay="" muted="" loop="">
+                    <source src="/hibernate/javax.faces.resource/movie/WEBM/Walking-Away.webm.xhtml?ln=auth" type="video/webm" />
+                    <source src="/hibernate/javax.faces.resource/movie/MP4/Walking-Away.mp4.xhtml?ln=auth" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+        <div class="in-text-logo">
+            <!--<img src="images/logo.png" style="height: 90px; width: 140px;">-->
+            <h:graphicImage library="auth" name="images/logo.png" style="height: 90px; width: 140px;"/>
+        </div>
+    </ui:insert>
+    <ui:insert name="content">
+
+    </ui:insert>
+    <ui:insert name="footer">
+
+        <h:outputScript library="auth" name="vendor/jquery/jquery-3.2.1.min.js"/>
+
+        <h:outputScript library="auth" name="vendor/animsition/js/animsition.min.js"/>
+
+        <h:outputScript library="auth" name="vendor/bootstrap/js/popper.js"/>
+
+        <h:outputScript library="auth" name="vendor/bootstrap/js/bootstrap.min.js"/>
+
+        <h:outputScript library="auth" name="vendor/select2/select2.min.js"/>
+
+        <h:outputScript library="auth" name="vendor/daterangepicker/moment.min.js"/>
+
+        <h:outputScript library="auth" name="vendor/daterangepicker/daterangepicker.js"/>
+
+        <h:outputScript library="auth" name="vendor/countdowntime/countdowntime.js"/>
+
+        <h:outputScript library="auth" name="js/main.js"/>
+    </ui:insert>
+</h:body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head><title>Test page</title></h:head>
+<h:body>
+    <ui:composition template="/template/mainTemplate.xhtml">
+        <ui:param name="pageTitle" value="Test Page"/>
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam name="projectId" value="#{projectController.projectId}"/>
+                <f:viewParam name="bmcId" value="#{bmcController.bmcId}"/>
+                <f:viewParam name="segmentContainer" value="#{segmentContainerController.segmentContainerId}"/>
+            </f:metadata>
+        </ui:define>
+        <ui:define name="content">
+            <div class="form">
+                <h1>Test page</h1>
+                <div class="content-center">
+                    <h:panelGroup rendered="#{sessionController.logged}">
+                        <h:panelGroup rendered="#{(sessionController.user.userRole.userRoleId == 1
+                                                        or sessionController.user.userRole.userRoleId == 2)}">
+                            <ui:repeat value="#{userController.getAllUsers()}" var="u">
+                                <div style="display: inline-block;margin-bottom: 20px;border-left:
+                                    solid black 1px;border-right: solid black 1px;">
+                                <h:panelGrid columns="2" width="300">
+                                    <h:outputText value="Id"/>
+                                    <h:outputText value=":#{u.userId}"/>
+
+                                    <h:outputText value="login"/>
+                                    <h:outputText value=":#{u.login}"/>
+
+                                    <h:outputText value="First name"/>
+                                    <h:outputText value=":#{u.fname}"/>
+
+                                    <h:outputText value="Last name"/>
+                                    <h:outputText value=":#{u.lname}"/>
+
+                                    <h:outputText value="email"/>
+                                    <h:outputText value=":#{u.email}"/>
+
+                                    <h:outputText value="phone"/>
+                                    <h:outputText value=":#{u.phoneF()}"/>
+
+                                    <h:outputText value="activation key"/>
+                                    <h:outputText value=":#{u.activationKey}"/>
+                                </h:panelGrid>
+                                </div>
+
+                            </ui:repeat>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{sessionController.user.userRole.userRoleId >= 3}">
+                            <h2><h:outputText value="You don't have permission to look a list"/></h2>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!sessionController.logged}">
+                        <h2><h:outputText value="Please sign in/up get persmission"/></h2>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:outputText value="bmcId: #{bmcController.bmcId}"/><br/>
+                    <h:outputText value="projectId: #{projectController.projectId}"/><br/>
+                    <h:outputText value="segmentContainerId: #{segmentContainerController.segmentContainerId}"/><br/>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

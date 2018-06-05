@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition>
+    <div class="container-fluid">
+        <div class="">
+            <div class="">
+                <div class="sidebar">
+                        <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getTeamLeader()}" var="projectMember" columnClasses="text-center" rowClasses="" >
+                            <f:facet name="caption">
+                                <div style="font-weight:600; text-align: center;">Менеджер проекта</div>
+                            </f:facet>
+
+                            <h:column headerClass="table-header" footerClass="table-footer">#{projectMember.user.fname} #{projectMember.user.lname}</h:column>
+                        </h:dataTable>
+                    <hr/>
+                    <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getTeamMembers()}" var="projectMember" >
+                        <f:facet name="caption">
+                            <div style="font-weight:600; text-align: center;">Члены команды</div>
+                        </f:facet>
+                        <h:column headerClass="table-header" footerClass="table-footer">
+                            <h:outputText styleClass="team-data" style="text-align: center;" value="#{projectMember.user.fname} #{projectMember.user.lname}"
+                                          rendered="#{projectMember.memberRole.memberRoleId == 2}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <hr/>
+                    <h:dataTable styleClass="sidebar-table text-center" value="#{projectController.project.getObservers()}" var="projectMember" >
+                        <f:facet name="caption">
+                            <div style="font-weight:600; text-align: center;">Наблюдатели</div>
+                        </f:facet>
+                        <h:column headerClass="table-header" footerClass="table-footer">
+                            <h:outputText styleClass="observer-data" style="text-align: center;" value="#{projectMember.user.fname} #{projectMember.user.lname}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <br/>
+                    <h:form styleClass="sidebar-table text-center">
+                        <h:commandButton styleClass="submit sidebar-table text-center" style="width: fit-content" value="#{field.addMember}" action="#{projectMemberController.addMember()}"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>
+</html>
